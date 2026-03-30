@@ -33,7 +33,7 @@
         .search-btn { background: #007aff; color: white; border: none; padding: 0 20px; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; }
         .search-btn:active { background: #005bb5; }
 
-        /* ================= 悬浮工具栏 ================= */
+        /* ================= 悬浮工具栏 (核心升级) ================= */
         .sticky-toolbar { 
             position: sticky; 
             top: 52px; 
@@ -268,9 +268,9 @@
             document.getElementById('stations-content').innerHTML = html;
         }
 
-        // 🚨 重点修复：使用最新稳定的 MobilityData 官方翻译库！
+        // 🚨 重点修复：使用稳定的 GitHub Raw 官方直连源！
         async function fetchSubwayProtobuf(feedName, targetLine) {
-            const root = await protobuf.load("https://cdn.jsdelivr.net/gh/MobilityData/gtfs-realtime-bindings@master/gtfs-realtime.proto");
+            const root = await protobuf.load("https://raw.githubusercontent.com/google/transit/master/gtfs-realtime/proto/gtfs-realtime.proto");
             const FeedMessage = root.lookupType("transit_realtime.FeedMessage");
             
             const response = await fetch(`${WORKER_URL}/?route=${feedName}`);
