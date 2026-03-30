@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTA 终极追踪器 (双轨全能版)</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/protobufjs@7.2.5/dist/protobuf.min.js"></script>
     
     <script src="stations.js"></script>
@@ -32,7 +33,7 @@
         .search-btn { background: #007aff; color: white; border: none; padding: 0 20px; border-radius: 10px; font-weight: bold; font-size: 16px; cursor: pointer; }
         .search-btn:active { background: #005bb5; }
 
-        /* ================= 悬浮工具栏 (核心升级) ================= */
+        /* ================= 悬浮工具栏 ================= */
         .sticky-toolbar { 
             position: sticky; 
             top: 52px; 
@@ -142,10 +143,12 @@
     </div>
 
     <script>
-        const WORKER_URL = "https://mta.zxc717209554.workers.dev"; // 你的后端服务
+        // 👇 你的 Cloudflare Worker 服务地址
+        const WORKER_URL = "https://mta.zxc717209554.workers.dev"; 
 
         // ==========================================
-        // 全局变量配置 (数据从 stations.js 自动加载)
+        // 全局变量配置
+        // 注意：LINE_MAP 和 STATION_DICT 已经安全地放在了 stations.js 中
         // ==========================================
         let currentView = 'view-home';
         let currentLine = ''; 
@@ -158,12 +161,19 @@
 
         function initHome() {
             const grid = document.getElementById('lineGrid');
+            // 如果外部的 stations.js 没有加载成功，给个提示
+            if (typeof LINE_MAP === 'undefined') {
+                grid.innerHTML = '<div style="color:red; font-weight:bold;">❌ 无法加载 stations.js 字典文件，请确保它与 index.html 在同一文件夹内。</div>';
+                return;
+            }
             for (let line in LINE_MAP) {
                 const conf = LINE_MAP[line];
                 grid.innerHTML += `<button class="subway-bullet" style="background-color: ${conf.color}; color: ${conf.textColor||'white'};" onclick="openSubwayLine('${line}')">${line}</button>`;
             }
         }
-        initHome();
+        
+        // 页面加载完成后初始化首页
+        window.onload = initHome;
 
         function switchView(viewId, title) {
             document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
@@ -216,8 +226,8 @@
         function renderSubwayUI() {
             const stations = STATION_DICT[currentLine] || [];
             const directions = [
-                { id: 'N', label: '⬆️ 北行 (Uptown / Queens)', stList: [...stations].reverse() },
-                { id: 'S', label: '⬇️ 南行 (Downtown / Brooklyn)', stList: [...stations] }
+                { id: 'N', label: '⬆️ 北行 (Uptown)', stList: [...stations].reverse() },
+                { id: 'S', label: '⬇️ 南行 (Downtown)', stList: [...stations] }
             ];
 
             let anchorsHtml = '';
@@ -258,10 +268,17 @@
             document.getElementById('stations-content').innerHTML = html;
         }
 
+        // 🚨 重点修复：使用最新稳定的 MobilityData 官方翻译库！
         async function fetchSubwayProtobuf(feedName, targetLine) {
-            const root = await protobuf.load("https://cdn.jsdelivr.net/gh/google/transit@master/gtfs-realtime/proto/gtfs-realtime.proto");
+            const root = await protobuf.load("https://cdn.jsdelivr.net/gh/MobilityData/gtfs-realtime-bindings@master/gtfs-realtime.proto");
             const FeedMessage = root.lookupType("transit_realtime.FeedMessage");
+            
             const response = await fetch(`${WORKER_URL}/?route=${feedName}`);
+            
+            if (!response.ok) {
+                throw new Error(`Worker 后端连接失败 (状态码: ${response.status})`);
+            }
+            
             const buffer = await response.arrayBuffer();
             const message = FeedMessage.decode(new Uint8Array(buffer));
             const data = FeedMessage.toObject(message, { enums: String, defaults: true });
@@ -271,6 +288,7 @@
                 if (entity.tripUpdate && entity.tripUpdate.stopTimeUpdate) {
                     const routeId = entity.tripUpdate.trip.routeId;
                     if (routeId !== targetLine && routeId !== targetLine + 'X') return; 
+                    
                     entity.tripUpdate.stopTimeUpdate.forEach(stop => {
                         const baseId = stop.stopId.substring(0, stop.stopId.length - 1);
                         const dir = stop.stopId.slice(-1);
