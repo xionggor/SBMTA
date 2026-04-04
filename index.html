@@ -13,65 +13,55 @@
             --card-bg: #1c1c1e; 
             --text-main: #ffffff; 
             --text-dim: #8e8e93; 
-            --badge-bg: #2c2c2e; 
         }
         
-        /* === 宽屏居中适配 === */
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             margin: 0; 
-            background-color: #000000; /* 两侧留白为黑色 */
+            background-color: #000000; 
             color: var(--text-main); 
             -webkit-font-smoothing: antialiased; 
-            overscroll-behavior-y: none; 
             display: flex;
-            justify-content: center; /* 核心：水平居中 */
+            justify-content: center; 
         }
         
         .app-wrapper {
             width: 100%;
-            max-width: 800px; /* 核心：限制最大宽度 */
+            max-width: 800px; 
             min-height: 100vh;
             background-color: var(--dark-bg);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             position: relative;
         }
 
-        /* === 顶部全局导航 === */
         .header-global { position: sticky; top: 0; z-index: 2000; background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(10px); }
         .app-title { padding: 12px 20px 5px 20px; font-size: 14px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; }
         .tab-nav { display: flex; padding: 10px 15px; gap: 8px; border-bottom: 0.5px solid #333; }
         .tab-item { flex: 1; padding: 8px; border-radius: 10px; border: none; background: #2c2c2e; color: var(--text-dim); font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .tab-item.active { background: #ffffff; color: #000000; }
 
-        /* === 悬浮控制台 (Sticky) === */
-        .sticky-toolbar { position: sticky; top: 76px; z-index: 1000; background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(10px); padding: 10px 15px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .sticky-toolbar { position: sticky; top: 76px; z-index: 1000; background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(10px); padding: 10px 15px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 10px; }
         .toolbar-btn { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
         .btn-back { background: #2c2c2e; color: #fff; flex: 0.4; }
         .btn-action { background: var(--mta-blue); color: #fff; }
 
         .container { padding: 15px; padding-bottom: 80px; }
         
-        /* === 视图控制 === */
         .layer-view { display: none; animation: fadeIn 0.3s ease; }
         .layer-view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* === 地铁线路网格 === */
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 15px; padding: 10px 0; }
-        .route-circle { width: 56px; height: 56px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: 900; color: white; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .route-circle { width: 56px; height: 56px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: 900; color: white; cursor: pointer; }
         
-        /* === 列表设计 (站名列表 & 详情) === */
-        .list-row { background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .list-row { background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
         .list-row:active { background: #2c2c2e; }
         .row-title { font-size: 17px; font-weight: 700; color: #fff; }
         .row-icon { color: var(--text-dim); font-size: 18px; }
 
-        /* === 地铁车站详情卡片 === */
         .station-card { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .dir-header { font-size: 14px; font-weight: 800; color: var(--text-dim); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #333; padding-bottom: 8px; }
         .route-times-row { display: flex; align-items: center; margin-bottom: 15px; gap: 15px; }
-        .route-times-row:last-child { margin-bottom: 0; }
         .mini-route { width: 36px; height: 36px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 16px; font-weight: 900; flex-shrink: 0; }
         
         .times-flex { display: flex; gap: 10px; flex-wrap: wrap; flex: 1; }
@@ -79,10 +69,9 @@
         .time-box .unit { font-size: 12px; font-weight: 500; color: var(--text-dim); }
         .time-box.arriving { background: #30d158; color: #000; }
 
-        /* === 巴士搜索与卡片 === */
         .search-container { margin-bottom: 20px; position: relative; }
         .search-input { width: 100%; background: #1c1c1e; border: none; padding: 15px; border-radius: 12px; color: #fff; font-size: 16px; box-sizing: border-box; outline: none; border: 1px solid #333; }
-        .suggestions { position: absolute; top: 55px; left: 0; right: 0; background: #2c2c2e; border-radius: 12px; z-index: 2000; overflow: hidden; display: none; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .suggestions { position: absolute; top: 55px; left: 0; right: 0; background: #2c2c2e; border-radius: 12px; z-index: 2000; overflow: hidden; display: none; }
         .sug-item { padding: 15px; border-bottom: 1px solid #3d3d3f; font-weight: bold; cursor: pointer; }
         
         .bus-row { background: var(--card-bg); border-radius: 16px; padding: 15px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 15px; }
@@ -91,6 +80,7 @@
         .bus-dest { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #fff; }
         
         .loading-shimmer { text-align: center; color: var(--text-dim); padding: 40px; font-weight: bold; }
+        .error-msg { color: #ff453a; font-size: 14px; margin-top: 10px; }
         .fav-btn { font-size: 26px; cursor: pointer; color: #3d3d3f; transition: 0.2s; }
         .fav-btn.active { color: #ffd60a; text-shadow: 0 0 10px rgba(255, 214, 10, 0.4); }
     </style>
@@ -98,7 +88,6 @@
 <body>
 
     <div class="app-wrapper">
-
         <div class="header-global">
             <div class="app-title">MTA Tracker Pro <span style="font-size: 10px; color: #30d158;">● 实时同步</span></div>
             <div class="tab-nav">
@@ -109,20 +98,12 @@
         </div>
 
         <div class="container">
-            
             <div id="layer-home" class="layer-view active">
-                
-                <div id="home-favs" style="display:block;">
-                    <div id="favs-content"><div class="loading-shimmer">正在加载收藏...</div></div>
-                </div>
-                
-                <div id="home-subway" style="display:none;">
-                    <div class="grid-container" id="subwayGrid"></div>
-                </div>
-
+                <div id="home-favs"><div id="favs-content"><div class="loading-shimmer">加载中...</div></div></div>
+                <div id="home-subway" style="display:none;"><div class="grid-container" id="subwayGrid"></div></div>
                 <div id="home-bus" style="display:none;">
                     <div class="search-container">
-                        <input type="text" id="busInput" class="search-input" placeholder="输入巴士号，如 B70, M15" oninput="busFuzzy(this.value)" autocomplete="off">
+                        <input type="text" id="busInput" class="search-input" placeholder="输入巴士号，如 B70" oninput="busFuzzy(this.value)" autocomplete="off">
                         <div id="busSug" class="suggestions"></div>
                     </div>
                 </div>
@@ -131,7 +112,7 @@
             <div id="layer-line" class="layer-view">
                 <div class="sticky-toolbar">
                     <button class="toolbar-btn btn-back" onclick="navTo('home')">← 返回</button>
-                    <div style="flex:1; font-weight:900; font-size:18px; text-align:center; color:#fff;" id="line-title">N Line</div>
+                    <div style="flex:1; font-weight:900; font-size:18px; text-align:center;" id="line-title"></div>
                 </div>
                 <div id="station-list-content" style="margin-top: 15px;"></div>
             </div>
@@ -142,7 +123,7 @@
                     <button class="toolbar-btn btn-action" onclick="fetchStationRealtime()">🔄 刷新数据</button>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 5px;">
-                    <h2 id="station-detail-title" style="margin: 0; color: #fff;"></h2>
+                    <h2 id="station-detail-title" style="margin: 0;"></h2>
                     <div id="station-fav-btn" class="fav-btn" onclick="toggleCurrentStationFav()">☆</div>
                 </div>
                 <div id="station-detail-content"></div>
@@ -153,42 +134,30 @@
                     <button class="toolbar-btn btn-back" onclick="navTo('home')">← 重搜</button>
                     <button class="toolbar-btn btn-action" onclick="refreshBus()">🔄 刷新位置</button>
                 </div>
-                <h2 id="bus-detail-title" style="margin: 20px 5px; color: #fff;"></h2>
+                <h2 id="bus-detail-title" style="margin: 20px 5px;"></h2>
                 <div id="bus-detail-content"></div>
             </div>
-
         </div>
+    </div>
 
-    </div> <script>
+    <script>
         const WORKER_URL = "https://mta.zxc717209554.workers.dev";
         const GTFS_PROTO = `syntax = "proto2"; package transit_realtime; message FeedMessage { repeated FeedEntity entity = 2; } message FeedEntity { optional TripUpdate trip_update = 3; } message TripUpdate { optional TripDescriptor trip = 1; repeated StopTimeUpdate stop_time_update = 2; } message TripDescriptor { optional string route_id = 5; } message StopTimeUpdate { optional StopTimeEvent arrival = 2; optional StopTimeEvent departure = 3; optional string stop_id = 4; } message StopTimeEvent { optional int64 time = 2; }`;
         const protoRoot = protobuf.parse(GTFS_PROTO).root;
         const FeedMessage = protoRoot.lookupType("transit_realtime.FeedMessage");
 
-        let state = {
-            activeTab: 'favs',   
-            currentLayer: 'home',
-            selectedLine: null,
-            selectedStation: { id: null, name: null },
-            selectedBus: null
-        };
+        let state = { activeTab: 'favs', currentLayer: 'home', selectedLine: null, selectedStation: { id: null, name: null }, selectedBus: null };
         let favorites = JSON.parse(localStorage.getItem('mta_pro_favs_v2') || '[]');
 
-        // ==========================================
-        // 🚀 核心导航路由
-        // ==========================================
-        function switchMainTab(tabId, btnElement) {
+        function switchMainTab(tabId, btn) {
             document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-            btnElement.classList.add('active');
+            btn.classList.add('active');
             state.activeTab = tabId;
-            
             document.getElementById('home-favs').style.display = tabId === 'favs' ? 'block' : 'none';
             document.getElementById('home-subway').style.display = tabId === 'subway' ? 'block' : 'none';
             document.getElementById('home-bus').style.display = tabId === 'bus' ? 'block' : 'none';
-            
             if (tabId === 'subway') renderSubwayGrid();
             if (tabId === 'favs') renderFavorites();
-            
             navTo('home'); 
         }
 
@@ -199,70 +168,56 @@
             window.scrollTo(0, 0); 
         }
 
-        // ==========================================
-        // 🚇 地铁逻辑
-        // ==========================================
         function renderSubwayGrid() {
             const grid = document.getElementById('subwayGrid');
             if (grid.innerHTML !== '') return; 
             for (let line in LINE_MAP) {
                 const conf = LINE_MAP[line];
-                const tc = conf.textColor || "white"; 
-                grid.innerHTML += `<div class="route-circle" style="background:${conf.color}; color:${tc};" onclick="openLineLayer('${line}')">${line}</div>`;
+                grid.innerHTML += `<div class="route-circle" style="background:${conf.color}; color:${conf.textColor||'white'};" onclick="openLineLayer('${line}')">${line}</div>`;
             }
         }
 
         function openLineLayer(line) {
             state.selectedLine = line;
-            document.getElementById('line-title').innerText = `${line} Line Stations`;
-            
+            document.getElementById('line-title').innerText = `${line} Line`;
             const stations = STATION_DICT[line] || [];
-            let html = '';
             if (stations.length === 0) {
-                html = `<div class="loading-shimmer">字典中暂无 ${line} 线数据</div>`;
-            } else {
-                stations.forEach(st => {
-                    html += `
-                    <div class="list-row" onclick="openStationLayer('${st.id}', '${st.name}')">
-                        <div class="row-title">${st.name}</div>
-                        <div class="row-icon">›</div>
-                    </div>`;
-                });
+                document.getElementById('station-list-content').innerHTML = `<div class="loading-shimmer">暂无数据</div>`;
+                navTo('line'); return;
             }
+            let html = '';
+            stations.forEach(st => html += `<div class="list-row" onclick="openStationLayer('${st.id}', '${st.name}')"><div class="row-title">${st.name}</div><div class="row-icon">›</div></div>`);
             document.getElementById('station-list-content').innerHTML = html;
             navTo('line');
         }
 
-        function openStationLayer(stopId, stopName, overrideLine = null) {
+        function openStationLayer(id, name, overrideLine = null) {
             if (overrideLine) state.selectedLine = overrideLine; 
-            state.selectedStation = { id: stopId, name: stopName };
-            document.getElementById('station-detail-title').innerText = stopName;
-            updateFavStarUI();
-            navTo('station');
-            fetchStationRealtime();
+            state.selectedStation = { id, name };
+            document.getElementById('station-detail-title').innerText = name;
+            updateFavStarUI(); navTo('station'); fetchStationRealtime();
         }
 
         async function fetchStationRealtime() {
             const content = document.getElementById('station-detail-content');
             content.innerHTML = `<div class="loading-shimmer">正在同步轨道信号...</div>`;
-            const line = state.selectedLine;
-            const targetStopId = state.selectedStation.id;
-            
             try {
-                const res = await fetch(`${WORKER_URL}/?route=${LINE_MAP[line].feed}`);
+                const res = await fetch(`${WORKER_URL}/?route=${LINE_MAP[state.selectedLine].feed}`);
+                if (!res.ok) throw new Error(`Worker HTTP Error: ${res.status}`); // 强行拦截错误
+
                 const buffer = await res.arrayBuffer();
                 const message = FeedMessage.decode(new Uint8Array(buffer));
                 const data = FeedMessage.toObject(message, { longs: String });
                 const now = Math.floor(Date.now() / 1000);
                 
                 let parsedData = { 'N': {}, 'S': {} }; 
-
                 (data.entity || []).forEach(ent => {
                     if (ent.tripUpdate && ent.tripUpdate.trip) {
                         const routeId = ent.tripUpdate.trip.routeId;
                         ent.tripUpdate.stopTimeUpdate.forEach(stu => {
                             const fullStopId = stu.stopId;
-                            if (fullStopId.startsWith(targetStopId)) { 
+                            // 核心修复：预防 fullStopId 为空导致的崩溃
+                            if (fullStopId && fullStopId.startsWith(state.selectedStation.id)) { 
                                 const dir = fullStopId.slice(-1); 
                                 const tObj = stu.arrival || stu.departure;
                                 if (tObj && tObj.time && (dir === 'N' || dir === 'S')) {
@@ -281,7 +236,6 @@
                 ['N', 'S'].forEach(dir => {
                     const dirTitle = dir === 'N' ? '⬆️ 北行 (Uptown / Queens)' : '⬇️ 南行 (Downtown / Brooklyn)';
                     html += `<div class="station-card"><div class="dir-header">${dirTitle}</div>`;
-                    
                     const routesAtDir = Object.keys(parsedData[dir]).sort();
                     if (routesAtDir.length === 0) {
                         html += `<div style="font-size:13px; color:#8e8e93; margin-top:10px;">暂无列车数据</div>`;
@@ -290,40 +244,30 @@
                             if (!LINE_MAP[rId]) return; 
                             const tc = LINE_MAP[rId].textColor || "white";
                             const times = parsedData[dir][rId].sort((a,b)=>a-b).slice(0,4); 
-                            html += `
-                            <div class="route-times-row">
-                                <div class="mini-route" style="background:${LINE_MAP[rId].color}; color:${tc};">${rId}</div>
-                                <div class="times-flex">${times.map(t => formatTime(t)).join('')}</div>
-                            </div>`;
+                            html += `<div class="route-times-row"><div class="mini-route" style="background:${LINE_MAP[rId].color}; color:${tc};">${rId}</div><div class="times-flex">${times.map(t => formatTime(t)).join('')}</div></div>`;
                         });
                     }
                     html += `</div>`;
                 });
                 content.innerHTML = html;
             } catch (e) {
-                content.innerHTML = `<div class="loading-shimmer">数据解析失败，请检查网络重试。</div>`;
+                console.error(e);
+                content.innerHTML = `<div class="loading-shimmer"><div class="error-msg">请求失败: ${e.message}</div></div>`;
             }
         }
 
-        // ==========================================
-        // 🚌 巴士逻辑
-        // ==========================================
+        // =================巴士逻辑=================
         const BUS_ROUTES_DB = ["B1","B63","B70","M15","M15-SBS","M34-SBS","Q58","S79-SBS","S93","BX12","BX12-SBS"];
-        
         function busFuzzy(val) {
             val = val.toUpperCase().trim();
             const sug = document.getElementById('busSug');
             if (val.length < 1) { sug.style.display = 'none'; return; }
-            
             const matches = BUS_ROUTES_DB.filter(r => r.includes(val));
             if(!matches.includes(val) && val.length > 1) matches.unshift(val);
-
             if (matches.length > 0) {
                 sug.innerHTML = matches.map(m => `<div class="sug-item" onclick="selectBus('${m}')">${m}</div>`).join('');
                 sug.style.display = 'block';
-            } else {
-                sug.style.display = 'none';
-            }
+            } else sug.style.display = 'none';
         }
 
         document.addEventListener('click', (e) => {
@@ -337,23 +281,20 @@
             document.getElementById('busInput').value = line;
             document.getElementById('busSug').style.display = 'none';
             state.selectedBus = line;
-            document.getElementById('bus-detail-title').innerText = line + " 实时位置";
-            navTo('bus-detail');
-            refreshBus();
+            document.getElementById('bus-detail-title').innerText = line;
+            navTo('bus-detail'); refreshBus();
         }
 
         async function refreshBus() {
             if (!state.selectedBus) return;
             const content = document.getElementById('bus-detail-content');
-            content.innerHTML = `<div class="loading-shimmer">正在拦截卫星信号...</div>`;
+            content.innerHTML = `<div class="loading-shimmer">定位数据获取中...</div>`;
             try {
                 const res = await fetch(`${WORKER_URL}/?type=bus-stops&route=${state.selectedBus}`);
-                const data = await res.json();
+                if (!res.ok) throw new Error("Worker Error");
                 
-                if(!data.data || !data.data.entry) {
-                    content.innerHTML = `<div class="loading-shimmer">未找到路线数据。</div>`;
-                    return;
-                }
+                const data = await res.json();
+                if(!data.data || !data.data.entry) throw new Error("MTA 返回空数据");
 
                 const stopGroups = data.data.entry.stopGroupings[0].stopGroups;
                 const stopsRef = data.data.references.stops.reduce((acc, s) => ({...acc, [s.id]: s.name}), {});
@@ -378,15 +319,12 @@
                     g.stopIds.forEach(sid => {
                         const isFav = favorites.some(f => f.id === sid);
                         const times = (vMap[sid] || []).filter(m => m >= -5).sort((a,b)=>a-b).slice(0,3);
-                        
                         html += `
                         <div class="bus-row">
                             <div class="bus-route-block">BUS</div>
                             <div class="bus-info">
                                 <div class="bus-dest">${stopsRef[sid]}</div>
-                                <div class="times-flex">
-                                    ${times.length > 0 ? times.map(t => formatTime(t)).join('') : '<div style="font-size:13px; color:#8e8e93;">暂无定位</div>'}
-                                </div>
+                                <div class="times-flex">${times.length > 0 ? times.map(t => formatTime(t)).join('') : '<div style="font-size:13px; color:#8e8e93;">暂无定位</div>'}</div>
                             </div>
                             <div class="fav-btn ${isFav?'active':''}" onclick="toggleBusFav('${state.selectedBus}', '${sid}', '${stopsRef[sid]}', this)">${isFav?'★':'☆'}</div>
                         </div>`;
@@ -394,86 +332,54 @@
                 });
                 content.innerHTML = html;
             } catch (e) { 
-                content.innerHTML = `<div class="loading-shimmer">请求失败，可能是 MTA 接口限制。</div>`; 
+                content.innerHTML = `<div class="loading-shimmer"><div class="error-msg">请求失败: ${e.message}</div></div>`; 
             }
+        }
+
+        // =================通用逻辑=================
+        function toggleCurrentStationFav() {
+            const sid = state.selectedStation.id; const line = state.selectedLine;
+            const idx = favorites.findIndex(f => f.id === sid && f.line === line);
+            if (idx > -1) favorites.splice(idx, 1);
+            else favorites.push({ type: 'subway', id: sid, line: line, name: state.selectedStation.name });
+            localStorage.setItem('mta_pro_favs_v2', JSON.stringify(favorites)); updateFavStarUI();
         }
 
         function toggleBusFav(line, id, name, el) {
             const idx = favorites.findIndex(f => f.id === id);
-            if (idx > -1) {
-                favorites.splice(idx, 1);
-                el.classList.remove('active'); el.innerText = '☆';
-            } else {
-                favorites.push({ type: 'bus', id: id, line: line, name: name });
-                el.classList.add('active'); el.innerText = '★';
-            }
+            if (idx > -1) { favorites.splice(idx, 1); el.classList.remove('active'); el.innerText = '☆'; } 
+            else { favorites.push({ type: 'bus', id: id, line: line, name: name }); el.classList.add('active'); el.innerText = '★'; }
             localStorage.setItem('mta_pro_favs_v2', JSON.stringify(favorites));
-        }
-
-        // ==========================================
-        // 🌟 收藏与通用逻辑
-        // ==========================================
-        function toggleCurrentStationFav() {
-            const sid = state.selectedStation.id;
-            const line = state.selectedLine;
-            const sname = state.selectedStation.name;
-            
-            const idx = favorites.findIndex(f => f.id === sid && f.line === line);
-            if (idx > -1) favorites.splice(idx, 1);
-            else favorites.push({ type: 'subway', id: sid, line: line, name: sname });
-            
-            localStorage.setItem('mta_pro_favs_v2', JSON.stringify(favorites));
-            updateFavStarUI();
         }
 
         function updateFavStarUI() {
             const btn = document.getElementById('station-fav-btn');
             const isFav = favorites.some(f => f.id === state.selectedStation.id && f.line === state.selectedLine);
-            if (isFav) { btn.classList.add('active'); btn.innerText = '★'; }
-            else { btn.classList.remove('active'); btn.innerText = '☆'; }
+            if (isFav) { btn.classList.add('active'); btn.innerText = '★'; } else { btn.classList.remove('active'); btn.innerText = '☆'; }
         }
 
         function renderFavorites() {
             const container = document.getElementById('favs-content');
             if (favorites.length === 0) {
-                container.innerHTML = `<div class="loading-shimmer" style="margin-top:50px;">暂无收藏<br><br>去查地铁或巴士点亮 ☆ 添加</div>`;
-                return;
+                container.innerHTML = `<div class="loading-shimmer" style="margin-top:50px;">暂无收藏</div>`; return;
             }
             let html = '';
             favorites.forEach(fav => {
-                if(fav.type === 'subway' || !fav.type) { // 地铁逻辑
+                if(fav.type === 'subway' || !fav.type) {
                     const conf = LINE_MAP[fav.line] || { color: '#333', textColor: '#fff' };
-                    html += `
-                    <div class="list-row" onclick="openStationLayer('${fav.id}', '${fav.name}', '${fav.line}')">
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <div class="mini-route" style="background:${conf.color}; color:${conf.textColor};">${fav.line}</div>
-                            <div class="row-title">${fav.name}</div>
-                        </div>
-                        <div class="row-icon">›</div>
-                    </div>`;
-                } else { // 巴士逻辑
-                    html += `
-                    <div class="list-row" onclick="selectBus('${fav.line}')">
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <div class="mini-route" style="background:var(--mta-blue); color:#fff; font-size:12px;">BUS</div>
-                            <div class="row-title">${fav.line} - ${fav.name}</div>
-                        </div>
-                        <div class="row-icon">›</div>
-                    </div>`;
+                    html += `<div class="list-row" onclick="openStationLayer('${fav.id}', '${fav.name}', '${fav.line}')"><div style="display:flex; align-items:center; gap:12px;"><div class="mini-route" style="background:${conf.color}; color:${conf.textColor};">${fav.line}</div><div class="row-title">${fav.name}</div></div><div class="row-icon">›</div></div>`;
+                } else {
+                    html += `<div class="list-row" onclick="selectBus('${fav.line}')"><div style="display:flex; align-items:center; gap:12px;"><div class="mini-route" style="background:var(--mta-blue); color:#fff; font-size:12px;">BUS</div><div class="row-title">${fav.line} - ${fav.name}</div></div><div class="row-icon">›</div></div>`;
                 }
             });
             container.innerHTML = html;
         }
 
         function formatTime(mins) {
-            if (mins <= 0) return `<div class="time-box arriving">正在停靠</div>`;
-            if (mins === 1) return `<div class="time-box arriving">1<span class="unit">m</span></div>`;
+            if (mins <= 0) return `<div class="time-box arriving">正在进站</div>`;
             return `<div class="time-box">${mins}<span class="unit">m</span></div>`;
         }
 
-        // ==========================================
-        // 🔄 后台静默刷新
-        // ==========================================
         setInterval(() => {
             if (document.visibilityState === 'visible') {
                 if (state.currentLayer === 'station') fetchStationRealtime();
@@ -481,7 +387,6 @@
             }
         }, 30000); 
 
-        // 初始化
         window.onload = () => { renderFavorites(); };
     </script>
 </body>
