@@ -7,40 +7,18 @@
     <script src="https://cdn.jsdelivr.net/npm/protobufjs@7.2.5/dist/protobuf.min.js"></script>
     <script src="stations.js"></script>
     <style>
-        :root { 
-            --mta-blue: #0039A6; 
-            --dark-bg: #121212; 
-            --card-bg: #1c1c1e; 
-            --text-main: #ffffff; 
-            --text-dim: #8e8e93; 
-        }
+        :root { --mta-blue: #0039A6; --dark-bg: #121212; --card-bg: #1c1c1e; --text-main: #ffffff; --text-dim: #8e8e93; }
         
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            margin: 0; 
-            background-color: #000000; 
-            color: var(--text-main); 
-            -webkit-font-smoothing: antialiased; 
-            display: flex;
-            justify-content: center; 
-        }
-        
-        .app-wrapper {
-            width: 100%;
-            max-width: 800px; 
-            min-height: 100vh;
-            background-color: var(--dark-bg);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; background-color: #000; color: var(--text-main); -webkit-font-smoothing: antialiased; display: flex; justify-content: center; overscroll-behavior-y: none; }
+        .app-wrapper { width: 100%; max-width: 800px; min-height: 100vh; background-color: var(--dark-bg); box-shadow: 0 0 20px rgba(0,0,0,0.5); position: relative; }
 
-        .header-global { position: sticky; top: 0; z-index: 2000; background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(10px); }
-        .app-title { padding: 12px 20px 5px 20px; font-size: 14px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; }
+        .header-global { position: sticky; top: 0; z-index: 2000; background: rgba(18,18,18,0.95); backdrop-filter: blur(10px); }
+        .app-title { padding: 12px 20px 5px 20px; font-size: 14px; font-weight: 800; color: var(--text-dim); text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
         .tab-nav { display: flex; padding: 10px 15px; gap: 8px; border-bottom: 0.5px solid #333; }
         .tab-item { flex: 1; padding: 8px; border-radius: 10px; border: none; background: #2c2c2e; color: var(--text-dim); font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .tab-item.active { background: #ffffff; color: #000000; }
 
-        .sticky-toolbar { position: sticky; top: 76px; z-index: 1000; background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(10px); padding: 10px 15px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 10px; }
+        .sticky-toolbar { position: sticky; top: 76px; z-index: 1000; background: rgba(18,18,18,0.95); backdrop-filter: blur(10px); padding: 10px 15px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 10px; }
         .toolbar-btn { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
         .btn-back { background: #2c2c2e; color: #fff; flex: 0.4; }
         .btn-action { background: var(--mta-blue); color: #fff; }
@@ -51,34 +29,38 @@
         .layer-view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* UI 组件 */
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 15px; padding: 10px 0; }
         .route-circle { width: 56px; height: 56px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: 900; color: white; cursor: pointer; }
         
         .list-row { background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
         .list-row:active { background: #2c2c2e; }
-        .row-title { font-size: 17px; font-weight: 700; color: #fff; }
-        .row-icon { color: var(--text-dim); font-size: 18px; }
+        .row-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+        .row-title { font-size: 17px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .row-icon { color: var(--text-dim); font-size: 18px; margin-left: 10px; }
+        .mini-route { width: 36px; height: 36px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 16px; font-weight: 900; flex-shrink: 0; }
+
+        /* 收藏夹实时看板区域 */
+        .live-dash { display: flex; gap: 6px; }
+        .dash-badge { background: #2c2c2e; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 3px; border: 1px solid #444; }
+        .dash-badge.arr { color: #30d158; border-color: #30d158; background: rgba(48,209,88,0.1); }
 
         .station-card { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .dir-header { font-size: 14px; font-weight: 800; color: var(--text-dim); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #333; padding-bottom: 8px; }
         .route-times-row { display: flex; align-items: center; margin-bottom: 15px; gap: 15px; }
-        .mini-route { width: 36px; height: 36px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 16px; font-weight: 900; flex-shrink: 0; }
-        
         .times-flex { display: flex; gap: 10px; flex-wrap: wrap; flex: 1; }
         .time-box { background: #2c2c2e; padding: 8px 12px; border-radius: 8px; font-size: 18px; font-weight: 800; color: #fff; display: flex; align-items: baseline; gap: 2px; }
         .time-box .unit { font-size: 12px; font-weight: 500; color: var(--text-dim); }
         .time-box.arriving { background: #30d158; color: #000; }
 
+        .borough-btn { background: #1c1c1e; border: 1px solid #333; border-radius: 12px; padding: 20px; text-align: center; font-size: 18px; font-weight: bold; color: #fff; cursor: pointer; margin-bottom: 12px; }
+        .borough-btn:active { background: #2c2c2e; }
+
         .search-container { margin-bottom: 20px; position: relative; }
         .search-input { width: 100%; background: #1c1c1e; border: none; padding: 15px; border-radius: 12px; color: #fff; font-size: 16px; box-sizing: border-box; outline: none; border: 1px solid #333; }
         .suggestions { position: absolute; top: 55px; left: 0; right: 0; background: #2c2c2e; border-radius: 12px; z-index: 2000; overflow: hidden; display: none; }
         .sug-item { padding: 15px; border-bottom: 1px solid #3d3d3f; font-weight: bold; cursor: pointer; }
-        
-        .bus-row { background: var(--card-bg); border-radius: 16px; padding: 15px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 15px; }
-        .bus-route-block { min-width: 52px; height: 52px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 16px; font-weight: 900; color: white; background: var(--mta-blue); }
-        .bus-info { flex: 1; min-width: 0; }
-        .bus-dest { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #fff; }
-        
+
         .loading-shimmer { text-align: center; color: var(--text-dim); padding: 40px; font-weight: bold; }
         .error-msg { color: #ff453a; font-size: 14px; margin-top: 10px; }
         .fav-btn { font-size: 26px; cursor: pointer; color: #3d3d3f; transition: 0.2s; }
@@ -99,43 +81,49 @@
 
         <div class="container">
             <div id="layer-home" class="layer-view active">
-                <div id="home-favs"><div id="favs-content"><div class="loading-shimmer">加载中...</div></div></div>
+                <div id="home-favs"><div id="favs-content"></div></div>
                 <div id="home-subway" style="display:none;"><div class="grid-container" id="subwayGrid"></div></div>
                 <div id="home-bus" style="display:none;">
                     <div class="search-container">
-                        <input type="text" id="busInput" class="search-input" placeholder="输入巴士号，如 B70" oninput="busFuzzy(this.value)" autocomplete="off">
+                        <input type="text" id="busInput" class="search-input" placeholder="输入线路如 B70, M15" oninput="busFuzzy(this.value)" autocomplete="off">
                         <div id="busSug" class="suggestions"></div>
+                    </div>
+                    <div id="bus-borough-grid">
+                        <div class="borough-btn" onclick="openBoroughLayer('Brooklyn')">🌉 Brooklyn</div>
+                        <div class="borough-btn" onclick="openBoroughLayer('Manhattan')">🗽 Manhattan</div>
+                        <div class="borough-btn" onclick="openBoroughLayer('Queens')">👑 Queens</div>
+                        <div class="borough-btn" onclick="openBoroughLayer('Bronx')">🌳 Bronx</div>
+                        <div class="borough-btn" onclick="openBoroughLayer('Staten Island')">⛴️ Staten Island</div>
                     </div>
                 </div>
             </div>
 
-            <div id="layer-line" class="layer-view">
+            <div id="layer-bus-routes" class="layer-view">
                 <div class="sticky-toolbar">
                     <button class="toolbar-btn btn-back" onclick="navTo('home')">← 返回</button>
-                    <div style="flex:1; font-weight:900; font-size:18px; text-align:center;" id="line-title"></div>
+                    <div style="flex:1; font-weight:900; font-size:18px; text-align:center;" id="borough-title"></div>
                 </div>
-                <div id="station-list-content" style="margin-top: 15px;"></div>
+                <div id="bus-routes-content" style="margin-top: 15px;"></div>
+            </div>
+
+            <div id="layer-stops" class="layer-view">
+                <div class="sticky-toolbar">
+                    <button class="toolbar-btn btn-back" id="stops-back-btn" onclick="navTo('home')">← 返回</button>
+                    <div style="flex:1; font-weight:900; font-size:18px; text-align:center;" id="route-title"></div>
+                </div>
+                <div id="stops-list-content" style="margin-top: 15px;"></div>
             </div>
 
             <div id="layer-station" class="layer-view">
                 <div class="sticky-toolbar">
-                    <button class="toolbar-btn btn-back" onclick="navTo('line')">← 线路</button>
-                    <button class="toolbar-btn btn-action" onclick="fetchStationRealtime()">🔄 刷新数据</button>
+                    <button class="toolbar-btn btn-back" onclick="navTo('stops')">← 站名</button>
+                    <button class="toolbar-btn btn-action" onclick="fetchStationRealtime()">🔄 刷新时间</button>
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 5px;">
                     <h2 id="station-detail-title" style="margin: 0;"></h2>
-                    <div id="station-fav-btn" class="fav-btn" onclick="toggleCurrentStationFav()">☆</div>
+                    <div id="station-fav-btn" class="fav-btn" onclick="toggleFav()">☆</div>
                 </div>
                 <div id="station-detail-content"></div>
-            </div>
-
-            <div id="layer-bus-detail" class="layer-view">
-                <div class="sticky-toolbar">
-                    <button class="toolbar-btn btn-back" onclick="navTo('home')">← 重搜</button>
-                    <button class="toolbar-btn btn-action" onclick="refreshBus()">🔄 刷新位置</button>
-                </div>
-                <h2 id="bus-detail-title" style="margin: 20px 5px;"></h2>
-                <div id="bus-detail-content"></div>
             </div>
         </div>
     </div>
@@ -146,8 +134,14 @@
         const protoRoot = protobuf.parse(GTFS_PROTO).root;
         const FeedMessage = protoRoot.lookupType("transit_realtime.FeedMessage");
 
-        let state = { activeTab: 'favs', currentLayer: 'home', selectedLine: null, selectedStation: { id: null, name: null }, selectedBus: null };
-        let favorites = JSON.parse(localStorage.getItem('mta_pro_favs_v2') || '[]');
+        let state = { 
+            activeTab: 'favs', 
+            currentLayer: 'home', 
+            mode: 'subway', // 'subway' or 'bus'
+            selectedLine: null, 
+            selectedStation: { id: null, name: null } 
+        };
+        let favorites = JSON.parse(localStorage.getItem('mta_pro_favs_v3') || '[]');
 
         function switchMainTab(tabId, btn) {
             document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
@@ -168,199 +162,310 @@
             window.scrollTo(0, 0); 
         }
 
+        // ==========================================
+        // 🌟 收藏夹看板 (核心功能)
+        // ==========================================
+        function renderFavorites() {
+            const container = document.getElementById('favs-content');
+            if (favorites.length === 0) {
+                container.innerHTML = `<div class="loading-shimmer" style="margin-top:50px;">暂无收藏<br><br>去查地铁或巴士点亮 ☆ 添加</div>`; return;
+            }
+            let html = '';
+            favorites.forEach(fav => {
+                const isSubway = fav.type === 'subway';
+                const conf = isSubway ? (LINE_MAP[fav.line] || { color: '#333', textColor: '#fff' }) : { color: 'var(--mta-blue)', textColor: '#fff' };
+                const iconTxt = isSubway ? fav.line : 'BUS';
+                const titleTxt = isSubway ? fav.name : `${fav.line} - ${fav.name}`;
+                
+                html += `
+                <div class="list-row" onclick="openStationLayer('${fav.id}', '${fav.name}', '${fav.line}', '${fav.type}')">
+                    <div class="row-left">
+                        <div class="mini-route" style="background:${conf.color}; color:${conf.textColor}; font-size:${isSubway?'16px':'10px'};">${iconTxt}</div>
+                        <div class="row-title">${titleTxt}</div>
+                    </div>
+                    <div class="live-dash" id="fav-dash-${fav.id}">
+                        <div class="dash-badge" style="color:#8e8e93; border:none;">测算中...</div>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+            updateFavoritesRealtime(); // 渲染完立刻去后台拉取时间
+        }
+
+        async function updateFavoritesRealtime() {
+            if (state.activeTab !== 'favs') return;
+            const now = Math.floor(Date.now() / 1000);
+
+            // 分类获取数据
+            const subwayFavs = favorites.filter(f => f.type === 'subway');
+            const busFavs = favorites.filter(f => f.type === 'bus');
+
+            // 1. 处理巴士收藏
+            busFavs.forEach(async (fav) => {
+                try {
+                    const fullStopId = fav.id.includes('_') ? fav.id : `MTA_${fav.id}`;
+                    const res = await fetch(`${WORKER_URL}/?type=bus-stop-monitoring&stopId=${fullStopId}`);
+                    const data = await res.json();
+                    const visits = data.Siri?.ServiceDelivery?.StopMonitoringDelivery[0]?.MonitoredStopVisit || [];
+                    let minTime = 999;
+                    visits.forEach(v => {
+                        const eta = v.MonitoredVehicleJourney?.MonitoredCall?.ExpectedArrivalTime;
+                        if(eta) {
+                            const mins = Math.round((new Date(eta) - new Date()) / 60000);
+                            if(mins >= -5 && mins < minTime) minTime = mins;
+                        }
+                    });
+                    const dashEl = document.getElementById(`fav-dash-${fav.id}`);
+                    if(dashEl) {
+                        if(minTime === 999) dashEl.innerHTML = `<div class="dash-badge">无车</div>`;
+                        else if (minTime <= 0) dashEl.innerHTML = `<div class="dash-badge arr">即将进站</div>`;
+                        else dashEl.innerHTML = `<div class="dash-badge">约 ${minTime}m</div>`;
+                    }
+                } catch(e) {}
+            });
+
+            // 2. 处理地铁收藏 (按 Feed 聚合请求，防止超额)
+            let feedMap = {};
+            subwayFavs.forEach(fav => {
+                const feed = LINE_MAP[fav.line]?.feed;
+                if(feed) { if(!feedMap[feed]) feedMap[feed] = []; feedMap[feed].push(fav); }
+            });
+
+            for (const [feed, favsInFeed] of Object.entries(feedMap)) {
+                try {
+                    const res = await fetch(`${WORKER_URL}/?route=${feed}`);
+                    if(!res.ok) continue;
+                    const buffer = await res.arrayBuffer();
+                    const message = FeedMessage.decode(new Uint8Array(buffer));
+                    const data = FeedMessage.toObject(message, { longs: String });
+
+                    let parsedTimes = {}; // { 'A24': { 'N': 1, 'S': 5 } }
+                    (data.entity || []).forEach(ent => {
+                        const stopTimes = ent.tripUpdate?.stopTimeUpdate || [];
+                        stopTimes.forEach(stu => {
+                            const fullStopId = stu.stopId;
+                            if (fullStopId) {
+                                const sid = fullStopId.slice(0, -1); const dir = fullStopId.slice(-1);
+                                const tObj = stu.arrival || stu.departure;
+                                if (tObj && tObj.time) {
+                                    const mins = Math.round((parseInt(tObj.time) - now) / 60);
+                                    if(mins <= 90) {
+                                        if(!parsedTimes[sid]) parsedTimes[sid] = { N: 999, S: 999 };
+                                        if(mins < parsedTimes[sid][dir]) parsedTimes[sid][dir] = mins;
+                                    }
+                                }
+                            }
+                        });
+                    });
+
+                    favsInFeed.forEach(fav => {
+                        const times = parsedTimes[fav.id] || { N: 999, S: 999 };
+                        const dashEl = document.getElementById(`fav-dash-${fav.id}`);
+                        if(dashEl) {
+                            let h = '';
+                            if(times.N !== 999) h += `<div class="dash-badge ${times.N<=0?'arr':''}">⬆ ${times.N<=0?'Due':times.N+'m'}</div>`;
+                            if(times.S !== 999) h += `<div class="dash-badge ${times.S<=0?'arr':''}">⬇ ${times.S<=0?'Due':times.S+'m'}</div>`;
+                            dashEl.innerHTML = h || `<div class="dash-badge">无车</div>`;
+                        }
+                    });
+                } catch(e) {}
+            }
+        }
+
+        // ==========================================
+        // 🚇 地铁逻辑
+        // ==========================================
         function renderSubwayGrid() {
             const grid = document.getElementById('subwayGrid');
             if (grid.innerHTML !== '') return; 
             for (let line in LINE_MAP) {
                 const conf = LINE_MAP[line];
-                grid.innerHTML += `<div class="route-circle" style="background:${conf.color}; color:${conf.textColor||'white'};" onclick="openLineLayer('${line}')">${line}</div>`;
+                grid.innerHTML += `<div class="route-circle" style="background:${conf.color}; color:${conf.textColor||'white'};" onclick="openRouteStops('${line}', 'subway')">${line}</div>`;
             }
         }
 
-        function openLineLayer(line) {
-            state.selectedLine = line;
-            document.getElementById('line-title').innerText = `${line} Line`;
-            const stations = STATION_DICT[line] || [];
-            if (stations.length === 0) {
-                document.getElementById('station-list-content').innerHTML = `<div class="loading-shimmer">暂无数据</div>`;
-                navTo('line'); return;
-            }
-            let html = '';
-            stations.forEach(st => html += `<div class="list-row" onclick="openStationLayer('${st.id}', '${st.name}')"><div class="row-title">${st.name}</div><div class="row-icon">›</div></div>`);
-            document.getElementById('station-list-content').innerHTML = html;
-            navTo('line');
-        }
-
-        function openStationLayer(id, name, overrideLine = null) {
-            if (overrideLine) state.selectedLine = overrideLine; 
-            state.selectedStation = { id, name };
-            document.getElementById('station-detail-title').innerText = name;
-            updateFavStarUI(); navTo('station'); fetchStationRealtime();
-        }
-
-        async function fetchStationRealtime() {
-            const content = document.getElementById('station-detail-content');
-            content.innerHTML = `<div class="loading-shimmer">正在同步轨道信号...</div>`;
-            try {
-                const res = await fetch(`${WORKER_URL}/?route=${LINE_MAP[state.selectedLine].feed}`);
-                if (!res.ok) throw new Error(`Worker HTTP Error: ${res.status}`); 
-
-                const buffer = await res.arrayBuffer();
-                const message = FeedMessage.decode(new Uint8Array(buffer));
-                const data = FeedMessage.toObject(message, { longs: String });
-                const now = Math.floor(Date.now() / 1000);
-                
-                let parsedData = { 'N': {}, 'S': {} }; 
-                // 🛠️ 终极防御：如果 data.entity 为 undefined，则默认为空数组
-                (data.entity || []).forEach(ent => {
-                    if (ent.tripUpdate && ent.tripUpdate.trip) {
-                        const routeId = ent.tripUpdate.trip.routeId;
-                        // 🛠️ 终极防御：如果列车尚未发布未来的停靠站，stopTimeUpdate 为空
-                        const stopTimes = ent.tripUpdate.stopTimeUpdate || []; 
-                        
-                        stopTimes.forEach(stu => {
-                            const fullStopId = stu.stopId;
-                            if (fullStopId && fullStopId.startsWith(state.selectedStation.id)) { 
-                                const dir = fullStopId.slice(-1); 
-                                const tObj = stu.arrival || stu.departure;
-                                if (tObj && tObj.time && (dir === 'N' || dir === 'S')) {
-                                    const mins = Math.round((parseInt(tObj.time) - now) / 60);
-                                    if (mins <= 90) { 
-                                        if (!parsedData[dir][routeId]) parsedData[dir][routeId] = [];
-                                        parsedData[dir][routeId].push(mins);
-                                    }
-                                }
-                            }
-                        });
-                    }
-                });
-
-                let html = '';
-                ['N', 'S'].forEach(dir => {
-                    const dirTitle = dir === 'N' ? '⬆️ 北行 (Uptown / Queens)' : '⬇️ 南行 (Downtown / Brooklyn)';
-                    html += `<div class="station-card"><div class="dir-header">${dirTitle}</div>`;
-                    const routesAtDir = Object.keys(parsedData[dir]).sort();
-                    if (routesAtDir.length === 0) {
-                        html += `<div style="font-size:13px; color:#8e8e93; margin-top:10px;">暂无列车数据</div>`;
-                    } else {
-                        routesAtDir.forEach(rId => {
-                            if (!LINE_MAP[rId]) return; 
-                            const tc = LINE_MAP[rId].textColor || "white";
-                            const times = parsedData[dir][rId].sort((a,b)=>a-b).slice(0,4); 
-                            html += `<div class="route-times-row"><div class="mini-route" style="background:${LINE_MAP[rId].color}; color:${tc};">${rId}</div><div class="times-flex">${times.map(t => formatTime(t)).join('')}</div></div>`;
-                        });
-                    }
-                    html += `</div>`;
-                });
-                content.innerHTML = html;
-            } catch (e) {
-                console.error(e);
-                content.innerHTML = `<div class="loading-shimmer"><div class="error-msg">请求失败: ${e.message}</div></div>`;
-            }
-        }
-
-        // =================巴士逻辑=================
-        const BUS_ROUTES_DB = ["B1","B63","B70","M15","M15-SBS","M34-SBS","Q58","S79-SBS","S93","BX12","BX12-SBS"];
+        // ==========================================
+        // 🚌 巴士逻辑
+        // ==========================================
         function busFuzzy(val) {
             val = val.toUpperCase().trim();
             const sug = document.getElementById('busSug');
             if (val.length < 1) { sug.style.display = 'none'; return; }
-            const matches = BUS_ROUTES_DB.filter(r => r.includes(val));
+            const matches = ALL_BUS_ROUTES.filter(r => r.includes(val));
             if(!matches.includes(val) && val.length > 1) matches.unshift(val);
             if (matches.length > 0) {
-                sug.innerHTML = matches.map(m => `<div class="sug-item" onclick="selectBus('${m}')">${m}</div>`).join('');
+                sug.innerHTML = matches.map(m => `<div class="sug-item" onclick="openRouteStops('${m}', 'bus')">${m}</div>`).join('');
                 sug.style.display = 'block';
             } else sug.style.display = 'none';
         }
+        document.addEventListener('click', (e) => { if (!e.target.closest('.search-container')) { const sug = document.getElementById('busSug'); if (sug) sug.style.display = 'none'; } });
 
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-container')) {
-                const sug = document.getElementById('busSug');
-                if (sug) sug.style.display = 'none';
-            }
-        });
-
-        function selectBus(line) {
-            document.getElementById('busInput').value = line;
-            document.getElementById('busSug').style.display = 'none';
-            state.selectedBus = line;
-            document.getElementById('bus-detail-title').innerText = line;
-            navTo('bus-detail'); refreshBus();
+        function openBoroughLayer(borough) {
+            document.getElementById('borough-title').innerText = `${borough} Buses`;
+            const routes = BUS_BOROUGHS[borough] || [];
+            let html = '';
+            routes.forEach(r => html += `<div class="list-row" onclick="openRouteStops('${r}', 'bus')"><div class="row-left"><div class="mini-route" style="background:var(--mta-blue); color:#fff; font-size:12px;">BUS</div><div class="row-title">${r}</div></div><div class="row-icon">›</div></div>`);
+            document.getElementById('bus-routes-content').innerHTML = html;
+            navTo('bus-routes');
         }
 
-        async function refreshBus() {
-            if (!state.selectedBus) return;
-            const content = document.getElementById('bus-detail-content');
-            content.innerHTML = `<div class="loading-shimmer">定位数据获取中...</div>`;
-            try {
-                const res = await fetch(`${WORKER_URL}/?type=bus-stops&route=${state.selectedBus}`);
-                if (!res.ok) throw new Error("Worker HTTP Error");
-                
-                const data = await res.json();
-                if(!data.data || !data.data.entry) throw new Error("MTA 返回空数据");
-
-                // 🛠️ 终极防御：防止没有站点数据时抛出 forEach 错误
-                const stopGroupings = data.data.entry.stopGroupings || [];
-                const stopGroups = stopGroupings[0]?.stopGroups || [];
-                const stopsRef = (data.data.references?.stops || []).reduce((acc, s) => ({...acc, [s.id]: s.name}), {});
-                
-                const rtRes = await fetch(`${WORKER_URL}/?type=bus-realtime&route=${state.selectedBus}`);
-                const rtData = await rtRes.json();
-                
-                // 🛠️ 终极防御：安全解析车辆数据
-                const vehicleDelivery = rtData.Siri?.ServiceDelivery?.VehicleMonitoringDelivery || [];
-                const vehicles = vehicleDelivery[0]?.VehicleActivity || [];
-                
-                const vMap = vehicles.reduce((acc, v) => {
-                    const sid = v.MonitoredVehicleJourney?.MonitoredCall?.StopPointRef;
-                    const eta = v.MonitoredVehicleJourney?.MonitoredCall?.ExpectedArrivalTime;
-                    if (sid && eta) {
-                        const mins = Math.round((new Date(eta) - new Date()) / 60000);
-                        if(!acc[sid]) acc[sid] = [];
-                        acc[sid].push(mins);
-                    }
-                    return acc;
-                }, {});
-
-                let html = '';
-                stopGroups.forEach(g => {
-                    html += `<div style="font-size:14px; font-weight:bold; color:var(--text-dim); margin:20px 0 10px 5px; border-bottom:1px solid #333; padding-bottom:5px;">前往: ${g.name?.name || '未知方向'}</div>`;
+        // ==========================================
+        // 🚉 通用站名列表 (Layer 2)
+        // ==========================================
+        async function openRouteStops(line, mode) {
+            state.selectedLine = line; state.mode = mode;
+            document.getElementById('route-title').innerText = `${line} Line`;
+            document.getElementById('stops-back-btn').onclick = () => {
+                if(mode === 'subway') navTo('home');
+                else if(document.getElementById('busInput').value) navTo('home'); // 从搜索进来的
+                else navTo('bus-routes');
+            };
+            const content = document.getElementById('stops-list-content');
+            
+            if (mode === 'subway') {
+                const stations = STATION_DICT[line] || [];
+                if (stations.length === 0) content.innerHTML = `<div class="loading-shimmer">字典中暂无数据</div>`;
+                else {
+                    let html = '';
+                    stations.forEach(st => html += `<div class="list-row" onclick="openStationLayer('${st.id}', '${st.name}')"><div class="row-title">${st.name}</div><div class="row-icon">›</div></div>`);
+                    content.innerHTML = html;
+                }
+                navTo('stops');
+            } 
+            else if (mode === 'bus') {
+                document.getElementById('busSug').style.display = 'none';
+                navTo('stops');
+                content.innerHTML = `<div class="loading-shimmer">正在获取 ${line} 线站台...</div>`;
+                try {
+                    const res = await fetch(`${WORKER_URL}/?type=bus-stops&route=${line}`);
+                    const data = await res.json();
+                    const stopGroups = data.data?.entry?.stopGroupings?.[0]?.stopGroups || [];
+                    const stopsRef = (data.data?.references?.stops || []).reduce((acc, s) => ({...acc, [s.id]: s.name}), {});
                     
-                    const stopIds = g.stopIds || [];
-                    stopIds.forEach(sid => {
-                        const isFav = favorites.some(f => f.id === sid);
-                        const times = (vMap[sid] || []).filter(m => m >= -5).sort((a,b)=>a-b).slice(0,3);
-                        html += `
-                        <div class="bus-row">
-                            <div class="bus-route-block">BUS</div>
-                            <div class="bus-info">
-                                <div class="bus-dest">${stopsRef[sid] || '未知站点'}</div>
-                                <div class="times-flex">${times.length > 0 ? times.map(t => formatTime(t)).join('') : '<div style="font-size:13px; color:#8e8e93;">暂无定位</div>'}</div>
-                            </div>
-                            <div class="fav-btn ${isFav?'active':''}" onclick="toggleBusFav('${state.selectedBus}', '${sid}', '${stopsRef[sid]}', this)">${isFav?'★':'☆'}</div>
-                        </div>`;
+                    let html = '';
+                    stopGroups.forEach(g => {
+                        html += `<div class="dir-header" style="margin-top:20px; color:var(--text-dim);">前往: ${g.name?.name || '未知方向'}</div>`;
+                        const stopIds = g.stopIds || [];
+                        stopIds.forEach(sid => {
+                            const sName = stopsRef[sid] || '未知站点';
+                            // 传入方向名字以便后续详情页使用
+                            html += `<div class="list-row" onclick="openStationLayer('${sid}', '${sName}', '${g.name?.name}')"><div class="row-title">${sName}</div><div class="row-icon">›</div></div>`;
+                        });
                     });
-                });
-                content.innerHTML = html;
-            } catch (e) { 
-                content.innerHTML = `<div class="loading-shimmer"><div class="error-msg">请求失败: ${e.message}</div></div>`; 
+                    content.innerHTML = html || `<div class="loading-shimmer">未找到路线数据。</div>`;
+                } catch(e) { content.innerHTML = `<div class="loading-shimmer">请求失败: ${e.message}</div>`; }
             }
         }
 
-        // =================通用逻辑=================
-        function toggleCurrentStationFav() {
+        // ==========================================
+        // 🕒 通用详情页 (Layer 3)
+        // ==========================================
+        function openStationLayer(id, name, overrideLineOrDir = null, modeOverride = null) {
+            if(modeOverride) state.mode = modeOverride;
+            if(state.mode === 'subway' && overrideLineOrDir) state.selectedLine = overrideLineOrDir;
+            
+            state.selectedStation = { id, name };
+            document.getElementById('station-detail-title').innerText = name;
+            updateFavStarUI(); navTo('station'); 
+            
+            // 如果是巴士，把方向存起来，免得详情页不知道往哪开
+            if(state.mode === 'bus') state.selectedStation.dirName = overrideLineOrDir || '实时定位';
+            fetchStationRealtime();
+        }
+
+        async function fetchStationRealtime() {
+            const content = document.getElementById('station-detail-content');
+            content.innerHTML = `<div class="loading-shimmer">正在同步定位数据...</div>`;
+            const now = Math.floor(Date.now() / 1000);
+
+            if (state.mode === 'subway') {
+                try {
+                    const res = await fetch(`${WORKER_URL}/?route=${LINE_MAP[state.selectedLine].feed}`);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`); 
+                    const buffer = await res.arrayBuffer();
+                    const message = FeedMessage.decode(new Uint8Array(buffer));
+                    const data = FeedMessage.toObject(message, { longs: String });
+                    
+                    let parsedData = { 'N': {}, 'S': {} }; 
+                    (data.entity || []).forEach(ent => {
+                        if (ent.tripUpdate && ent.tripUpdate.trip) {
+                            const rId = ent.tripUpdate.trip.routeId;
+                            const stopTimes = ent.tripUpdate.stopTimeUpdate || []; 
+                            stopTimes.forEach(stu => {
+                                const fId = stu.stopId;
+                                if (fId && fId.startsWith(state.selectedStation.id)) { 
+                                    const dir = fId.slice(-1); const tObj = stu.arrival || stu.departure;
+                                    if (tObj && tObj.time && (dir === 'N' || dir === 'S')) {
+                                        const mins = Math.round((parseInt(tObj.time) - now) / 60);
+                                        if (mins <= 90) { 
+                                            if (!parsedData[dir][rId]) parsedData[dir][rId] = [];
+                                            parsedData[dir][rId].push(mins);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    let html = '';
+                    ['N', 'S'].forEach(dir => {
+                        const dirTitle = dir === 'N' ? '⬆️ 北行 (Uptown / Queens)' : '⬇️ 南行 (Downtown / Brooklyn)';
+                        html += `<div class="station-card"><div class="dir-header">${dirTitle}</div>`;
+                        const routesAtDir = Object.keys(parsedData[dir]).sort();
+                        if (routesAtDir.length === 0) html += `<div style="font-size:13px; color:#8e8e93; margin-top:10px;">暂无列车</div>`;
+                        else {
+                            routesAtDir.forEach(rId => {
+                                if (!LINE_MAP[rId]) return; 
+                                const tc = LINE_MAP[rId].textColor || "white";
+                                const times = parsedData[dir][rId].sort((a,b)=>a-b).slice(0,4); 
+                                html += `<div class="route-times-row"><div class="mini-route" style="background:${LINE_MAP[rId].color}; color:${tc};">${rId}</div><div class="times-flex">${times.map(t => formatTime(t)).join('')}</div></div>`;
+                            });
+                        }
+                        html += `</div>`;
+                    });
+                    content.innerHTML = html;
+                } catch (e) { content.innerHTML = `<div class="loading-shimmer"><div class="error-msg">请求失败: ${e.message}</div></div>`; }
+            } 
+            else if (state.mode === 'bus') {
+                try {
+                    const fullStopId = state.selectedStation.id.includes('_') ? state.selectedStation.id : `MTA_${state.selectedStation.id}`;
+                    const res = await fetch(`${WORKER_URL}/?type=bus-stop-monitoring&stopId=${fullStopId}`);
+                    const data = await res.json();
+                    const visits = data.Siri?.ServiceDelivery?.StopMonitoringDelivery[0]?.MonitoredStopVisit || [];
+                    
+                    let times = [];
+                    visits.forEach(v => {
+                        const eta = v.MonitoredVehicleJourney?.MonitoredCall?.ExpectedArrivalTime;
+                        if(eta) {
+                            const mins = Math.round((new Date(eta) - new Date()) / 60000);
+                            if(mins >= -5) times.push(mins);
+                        }
+                    });
+                    times = times.sort((a,b)=>a-b).slice(0, 4);
+
+                    let html = `<div class="station-card">
+                        <div class="dir-header">前往: ${state.selectedStation.dirName || '沿线目的地'}</div>
+                        <div class="route-times-row" style="margin-top:20px;">
+                            <div class="mini-route" style="background:var(--mta-blue); color:#fff; width:46px; height:46px; font-size:18px;">${state.selectedLine}</div>
+                            <div class="times-flex">
+                                ${times.length > 0 ? times.map(t => formatTime(t)).join('') : '<div style="font-size:14px; color:#8e8e93; font-weight:bold;">暂无定位数据</div>'}
+                            </div>
+                        </div>
+                    </div>`;
+                    content.innerHTML = html;
+                } catch (e) { content.innerHTML = `<div class="loading-shimmer"><div class="error-msg">请求失败: ${e.message}</div></div>`; }
+            }
+        }
+
+        // ==========================================
+        // 🛠️ 收藏控制与工具
+        // ==========================================
+        function toggleFav() {
             const sid = state.selectedStation.id; const line = state.selectedLine;
             const idx = favorites.findIndex(f => f.id === sid && f.line === line);
             if (idx > -1) favorites.splice(idx, 1);
-            else favorites.push({ type: 'subway', id: sid, line: line, name: state.selectedStation.name });
-            localStorage.setItem('mta_pro_favs_v2', JSON.stringify(favorites)); updateFavStarUI();
-        }
-
-        function toggleBusFav(line, id, name, el) {
-            const idx = favorites.findIndex(f => f.id === id);
-            if (idx > -1) { favorites.splice(idx, 1); el.classList.remove('active'); el.innerText = '☆'; } 
-            else { favorites.push({ type: 'bus', id: id, line: line, name: name }); el.classList.add('active'); el.innerText = '★'; }
-            localStorage.setItem('mta_pro_favs_v2', JSON.stringify(favorites));
+            else favorites.push({ type: state.mode, id: sid, line: line, name: state.selectedStation.name });
+            localStorage.setItem('mta_pro_favs_v3', JSON.stringify(favorites)); updateFavStarUI();
         }
 
         function updateFavStarUI() {
@@ -369,32 +474,15 @@
             if (isFav) { btn.classList.add('active'); btn.innerText = '★'; } else { btn.classList.remove('active'); btn.innerText = '☆'; }
         }
 
-        function renderFavorites() {
-            const container = document.getElementById('favs-content');
-            if (favorites.length === 0) {
-                container.innerHTML = `<div class="loading-shimmer" style="margin-top:50px;">暂无收藏</div>`; return;
-            }
-            let html = '';
-            favorites.forEach(fav => {
-                if(fav.type === 'subway' || !fav.type) {
-                    const conf = LINE_MAP[fav.line] || { color: '#333', textColor: '#fff' };
-                    html += `<div class="list-row" onclick="openStationLayer('${fav.id}', '${fav.name}', '${fav.line}')"><div style="display:flex; align-items:center; gap:12px;"><div class="mini-route" style="background:${conf.color}; color:${conf.textColor};">${fav.line}</div><div class="row-title">${fav.name}</div></div><div class="row-icon">›</div></div>`;
-                } else {
-                    html += `<div class="list-row" onclick="selectBus('${fav.line}')"><div style="display:flex; align-items:center; gap:12px;"><div class="mini-route" style="background:var(--mta-blue); color:#fff; font-size:12px;">BUS</div><div class="row-title">${fav.line} - ${fav.name}</div></div><div class="row-icon">›</div></div>`;
-                }
-            });
-            container.innerHTML = html;
-        }
-
         function formatTime(mins) {
-            if (mins <= 0) return `<div class="time-box arriving">正在进站</div>`;
+            if (mins <= 0) return `<div class="time-box arriving">即刻进站</div>`;
             return `<div class="time-box">${mins}<span class="unit">m</span></div>`;
         }
 
         setInterval(() => {
             if (document.visibilityState === 'visible') {
                 if (state.currentLayer === 'station') fetchStationRealtime();
-                if (state.currentLayer === 'bus-detail') refreshBus();
+                if (state.currentLayer === 'home' && state.activeTab === 'favs') updateFavoritesRealtime();
             }
         }, 30000); 
 
