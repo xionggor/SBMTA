@@ -14,113 +14,118 @@
         .app-wrapper { width: 100%; max-width: 600px; margin: 0 auto; min-height: 100vh; background-color: var(--dark-bg); box-shadow: 0 0 20px rgba(0,0,0,0.5); position: relative; }
 
         .header-global { position: sticky; top: 0; z-index: 2000; background: rgba(18,18,18,0.95); backdrop-filter: blur(10px); }
-        /* ⚙️ 隐藏的设置入口：点击标题即可触发 */
-        .app-title { padding: 16px 20px 8px 20px; font-size: 16px; font-weight: 900; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+        .app-title { padding: 14px 18px 8px 18px; font-size: 15px; font-weight: 900; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
         .app-title:active { opacity: 0.5; }
         
-        .tab-nav { display: flex; padding: 10px 16px; gap: 8px; border-bottom: 0.5px solid #333; }
-        .tab-item { flex: 1; padding: 12px 0; border-radius: 12px; border: none; background: #2c2c2e; color: var(--text-dim); font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; text-align: center; }
+        .tab-nav { display: flex; padding: 8px 14px; gap: 8px; border-bottom: 0.5px solid #333; }
+        .tab-item { flex: 1; padding: 10px 0; border-radius: 10px; border: none; background: #2c2c2e; color: var(--text-dim); font-size: 13px; font-weight: bold; cursor: pointer; transition: 0.2s; text-align: center; }
         .tab-item.active { background: #ffffff; color: #000000; }
 
-        .sticky-toolbar { position: sticky; top: 88px; z-index: 1000; background: rgba(18,18,18,0.95); backdrop-filter: blur(10px); padding: 12px 16px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 12px; }
-        .toolbar-btn { flex: 1; padding: 14px; border-radius: 12px; border: none; font-weight: bold; font-size: 15px; cursor: pointer; }
+        .sticky-toolbar { position: sticky; top: 82px; z-index: 1000; background: rgba(18,18,18,0.95); backdrop-filter: blur(10px); padding: 10px 14px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 10px; }
+        .toolbar-btn { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; font-size: 14px; cursor: pointer; }
         .btn-back { background: #2c2c2e; color: #fff; flex: 0.4; }
         .btn-action { background: var(--mta-blue); color: #fff; }
 
-        .container { padding: 16px; padding-bottom: 100px; }
+        .container { padding: 14px; padding-bottom: 100px; }
         
         .layer-view { display: none; animation: fadeIn 0.3s ease; }
         .layer-view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .favs-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; margin-top: 5px; }
-        .favs-header-title { margin: 0; color: #fff; font-size: 22px; font-weight: 900; }
-        .favs-refresh-btn { background: var(--card-bg); color: #fff; border: 1px solid #333; padding: 8px 16px; border-radius: 10px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+        .favs-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; margin-top: 4px; }
+        .favs-header-title { margin: 0; color: #fff; font-size: 20px; font-weight: 900; }
+        .favs-refresh-btn { background: var(--card-bg); color: #fff; border: 1px solid #333; padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 4px; }
         .favs-refresh-btn:active { background: #333; }
 
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 16px; padding: 10px 0; }
-        .route-circle-wrapper { position: relative; display: inline-block; }
-        .route-circle { width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: 900; color: white; cursor: pointer; }
-        .alert-dot { position: absolute; top: -2px; right: -2px; background: #ff3b30; width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--dark-bg); z-index: 5; box-shadow: 0 0 10px rgba(255,59,48,0.5); }
+        /* 🚇 大厅网格圆圈缩小 */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(55px, 1fr)); gap: 14px; padding: 8px 0; }
+        .route-circle-wrapper { position: relative; display: inline-block; flex-shrink: 0; }
+        .route-circle { width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; font-weight: 900; color: white; cursor: pointer; }
         
-        /* 🚨 折叠式战术情报板 */
-        .alert-banner { background: #1c1c1e; border-left: 5px solid #ff3b30; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); overflow: hidden; transition: all 0.3s ease; }
-        .alert-header { padding: 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-        .alert-header strong { font-size: 15px; line-height: 1.4; flex: 1; padding-right: 10px; }
-        .alert-arrow { font-size: 12px; color: var(--text-dim); transition: transform 0.3s; }
+        /* 🚨 红点角标统一控制 */
+        .alert-dot { position: absolute; top: -1px; right: -1px; background: #ff3b30; width: 12px; height: 12px; border-radius: 50%; border: 2.5px solid var(--dark-bg); z-index: 5; box-shadow: 0 0 8px rgba(255,59,48,0.6); }
+
+        /* 🚨 详情页战术情报板缩放 */
+        .alert-banner { background: #1c1c1e; border-left: 4px solid #ff3b30; margin-bottom: 16px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); overflow: hidden; transition: all 0.3s ease; }
+        .alert-header { padding: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+        .alert-header strong { font-size: 14px; line-height: 1.4; flex: 1; padding-right: 8px; }
+        .alert-arrow { font-size: 11px; color: var(--text-dim); transition: transform 0.3s; }
         .alert-arrow.up { transform: rotate(180deg); }
-        .alert-content { display: none; padding: 0 16px 16px 16px; font-size: 14px; color: #ddd; line-height: 1.6; border-top: 1px solid #333; margin-top: 5px; padding-top: 12px; }
+        .alert-content { display: none; padding: 0 14px 14px 14px; font-size: 13px; color: #ddd; line-height: 1.5; border-top: 1px solid #333; margin-top: 4px; padding-top: 10px; }
         .alert-content.show { display: block; animation: fadeIn 0.3s ease; }
         
-        /* 💥 停运级别的呼吸灯特效 */
-        @keyframes flash-border { 0% { box-shadow: 0 0 5px rgba(255,59,48,0.2); } 50% { box-shadow: 0 0 20px rgba(255,59,48,0.8); } 100% { box-shadow: 0 0 5px rgba(255,59,48,0.2); } }
+        @keyframes flash-border { 0% { box-shadow: 0 0 4px rgba(255,59,48,0.2); } 50% { box-shadow: 0 0 16px rgba(255,59,48,0.8); } 100% { box-shadow: 0 0 4px rgba(255,59,48,0.2); } }
         .alert-severe { animation: flash-border 2s infinite; }
 
-        .list-row { background: var(--card-bg); border-radius: 16px; padding: 16px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; position: relative; }
+        /* 📋 列表项整体精细化缩放 (-18%) */
+        .list-row { background: var(--card-bg); border-radius: 14px; padding: 13px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; position: relative; }
         .list-row:active { background: #2c2c2e; }
         
         .sortable-ghost { opacity: 0.4; }
-        .sortable-drag { background: #333; box-shadow: 0 10px 30px rgba(0,0,0,0.8); transform: scale(1.02); }
+        .sortable-drag { background: #333; box-shadow: 0 8px 24px rgba(0,0,0,0.8); transform: scale(1.02); }
 
-        .ferry-next { background: #30d158 !important; color: #000 !important; transform: scale(1.02); transition: 0.3s; box-shadow: 0 0 15px rgba(48,209,88,0.3); }
+        .ferry-next { background: #30d158 !important; color: #000 !important; transform: scale(1.02); transition: 0.3s; box-shadow: 0 0 12px rgba(48,209,88,0.3); }
         .ferry-next:active { background: #28b04a !important; }
 
-        .row-left { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; pointer-events: none; }
-        .row-title { font-size: 15px; font-weight: 700; color: #fff; white-space: normal; line-height: 1.4; word-break: break-word; padding-right: 10px; }
-        .row-icon { color: var(--text-dim); font-size: 20px; margin-left: 5px; }
+        .row-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; pointer-events: none; }
+        .row-title { font-size: 14px; font-weight: 700; color: #fff; white-space: normal; line-height: 1.3; word-break: break-word; padding-right: 8px; }
+        .row-icon { color: var(--text-dim); font-size: 18px; margin-left: 4px; }
         
-        .mini-route { width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; flex-shrink: 0; }
-        .mini-route.sub { font-size: 20px; }
-        .mini-route.bus { font-size: 12px; }
+        /* 路线圆圈缩小 */
+        .mini-route { width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; flex-shrink: 0; }
+        .mini-route.sub { font-size: 16px; }
+        .mini-route.bus { font-size: 10px; }
 
-        .live-dash { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; pointer-events: none; flex-shrink: 0; }
-        .dash-badge { background: #2c2c2e; padding: 8px 12px; border-radius: 10px; font-size: 15px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 4px; border: 1px solid #444; }
-        .dash-icon { font-size: 1.3em; display: inline-block; transform: translateY(-1px); } 
+        /* 时间方块缩小 */
+        .live-dash { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; pointer-events: none; flex-shrink: 0; }
+        .dash-badge { background: #2c2c2e; padding: 6px 10px; border-radius: 8px; font-size: 13px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 3px; border: 1px solid #444; }
+        .dash-icon { font-size: 1.2em; display: inline-block; transform: translateY(-1px); } 
         .dash-badge.arr { color: #30d158; border-color: #30d158; background: rgba(48,209,88,0.1); }
 
-        .timeline-wrapper { display: flex; margin-bottom: 12px; cursor: pointer; }
+        /* 📍 站点时间轴缩小 */
+        .timeline-wrapper { display: flex; margin-bottom: 10px; cursor: pointer; }
         .timeline-wrapper:active .list-row { background: #2c2c2e; }
         .timeline-wrapper .list-row { flex: 1; margin-bottom: 0; }
-        .timeline-graphic { width: 50px; display: flex; flex-direction: column; align-items: center; position: relative; flex-shrink: 0; }
-        .line-segment { width: 6px; background-color: var(--route-color, #fff); }
+        .timeline-graphic { width: 40px; display: flex; flex-direction: column; align-items: center; position: relative; flex-shrink: 0; }
+        .line-segment { width: 4px; background-color: var(--route-color, #fff); }
         .line-top { position: absolute; top: 0; height: 50%; }
         .line-bottom { position: absolute; bottom: 0; height: 50%; }
-        .timeline-node { width: 16px; height: 16px; background-color: var(--dark-bg); border: 4px solid var(--route-color, #fff); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; transition: 0.2s; }
-        .timeline-node.square { border-radius: 5px; } 
+        .timeline-node { width: 14px; height: 14px; background-color: var(--dark-bg); border: 3px solid var(--route-color, #fff); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; transition: 0.2s; }
+        .timeline-node.square { border-radius: 4px; } 
         .timeline-node.circle { border-radius: 50%; } 
         .timeline-wrapper:active .timeline-node { background-color: var(--route-color, #fff); }
 
-        .station-card { background: var(--card-bg); border-radius: 16px; padding: 24px; margin-bottom: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-        .dir-header { font-size: 16px; font-weight: 800; color: var(--text-dim); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #333; padding-bottom: 12px; }
-        .route-times-row { display: flex; align-items: center; margin-bottom: 18px; gap: 15px; }
-        .times-flex { display: flex; gap: 12px; flex-wrap: wrap; flex: 1; }
-        .time-box { background: #2c2c2e; padding: 10px 14px; border-radius: 10px; font-size: 20px; font-weight: 800; color: #fff; display: flex; align-items: baseline; gap: 4px; }
-        .time-box .unit { font-size: 14px; font-weight: 500; color: var(--text-dim); }
+        .station-card { background: var(--card-bg); border-radius: 14px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .dir-header { font-size: 14px; font-weight: 800; color: var(--text-dim); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .route-times-row { display: flex; align-items: center; margin-bottom: 15px; gap: 12px; }
+        .times-flex { display: flex; gap: 10px; flex-wrap: wrap; flex: 1; }
+        .time-box { background: #2c2c2e; padding: 8px 12px; border-radius: 8px; font-size: 18px; font-weight: 800; color: #fff; display: flex; align-items: baseline; gap: 3px; }
+        .time-box .unit { font-size: 12px; font-weight: 500; color: var(--text-dim); }
         .time-box.arriving { background: #30d158; color: #000; }
 
-        .borough-btn { background: #1c1c1e; border: 1px solid #333; border-radius: 14px; padding: 24px; text-align: center; font-size: 20px; font-weight: bold; color: #fff; cursor: pointer; margin-bottom: 15px; line-height: 1.4; position: relative; }
+        .borough-btn { background: #1c1c1e; border: 1px solid #333; border-radius: 12px; padding: 20px; text-align: center; font-size: 18px; font-weight: bold; color: #fff; cursor: pointer; margin-bottom: 12px; line-height: 1.4; position: relative; }
         .borough-btn:active { background: #2c2c2e; }
 
-        .search-container { margin-bottom: 24px; position: relative; }
-        .search-input { width: 100%; background: #1c1c1e; border: none; padding: 18px; border-radius: 14px; color: #fff; font-size: 18px; box-sizing: border-box; outline: none; border: 1px solid #333; }
-        .suggestions { position: absolute; top: 62px; left: 0; right: 0; background: #2c2c2e; border-radius: 14px; z-index: 2000; overflow: hidden; display: none; }
-        .sug-item { padding: 18px; border-bottom: 1px solid #3d3d3f; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .search-container { margin-bottom: 20px; position: relative; }
+        .search-input { width: 100%; background: #1c1c1e; border: none; padding: 15px; border-radius: 12px; color: #fff; font-size: 16px; box-sizing: border-box; outline: none; border: 1px solid #333; }
+        .suggestions { position: absolute; top: 56px; left: 0; right: 0; background: #2c2c2e; border-radius: 12px; z-index: 2000; overflow: hidden; display: none; }
+        .sug-item { padding: 15px; border-bottom: 1px solid #3d3d3f; font-size: 15px; font-weight: bold; cursor: pointer; }
 
-        .loading-shimmer { text-align: center; color: var(--text-dim); padding: 50px; font-size: 16px; font-weight: bold; }
-        .error-msg { color: #ff453a; font-size: 15px; margin-top: 12px; }
-        .fav-btn { font-size: 32px; cursor: pointer; color: #3d3d3f; transition: 0.2s; }
-        .fav-btn.active { color: #ffd60a; text-shadow: 0 0 16px rgba(255, 214, 10, 0.4); }
+        .loading-shimmer { text-align: center; color: var(--text-dim); padding: 40px; font-size: 14px; font-weight: bold; }
+        .error-msg { color: #ff453a; font-size: 14px; margin-top: 10px; }
+        .fav-btn { font-size: 28px; cursor: pointer; color: #3d3d3f; transition: 0.2s; }
+        .fav-btn.active { color: #ffd60a; text-shadow: 0 0 14px rgba(255, 214, 10, 0.4); }
         
-        #station-detail-title, #route-title, #borough-title, #bus-detail-title { font-size: 24px; }
+        #station-detail-title, #route-title, #borough-title, #bus-detail-title { font-size: 20px; }
         
-        /* ⚙️ 设置页专属 UI */
-        .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #333; }
+        /* ⚙️ 设置页 */
+        .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #333; }
         .setting-row:last-child { border-bottom: none; }
-        .lang-btn { background: #2c2c2e; color: #fff; border: 1px solid #444; padding: 8px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .lang-btn { background: #2c2c2e; color: #fff; border: 1px solid #444; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; }
         .lang-btn.active { background: var(--mta-blue); border-color: var(--mta-blue); }
-        .changelog-item { margin-bottom: 15px; }
-        .changelog-version { font-weight: 900; color: #fff; margin-bottom: 5px; font-size: 16px; }
-        .changelog-desc { color: var(--text-dim); font-size: 14px; line-height: 1.5; padding-left: 10px; border-left: 2px solid #444; }
+        .changelog-item { margin-bottom: 12px; }
+        .changelog-version { font-weight: 900; color: #fff; margin-bottom: 4px; font-size: 14px; }
+        .changelog-desc { color: var(--text-dim); font-size: 13px; line-height: 1.5; padding-left: 8px; border-left: 2px solid #444; }
     </style>
 </head>
 <body>
@@ -128,7 +133,7 @@
     <div class="app-wrapper">
         <div class="header-global">
             <div class="app-title" onclick="navTo('settings')">
-                <span>SB MTA <span style="font-size: 11px; color: var(--text-dim); font-weight: normal; margin-left:5px;">V2.0</span></span>
+                <span>SB MTA <span style="font-size: 10px; color: var(--text-dim); font-weight: normal; margin-left:4px;">V2.0</span></span>
                 <span style="font-size: 10px; color: #30d158;">● <span data-i18n="live_sync">实时同步</span></span>
             </div>
             <div class="tab-nav" id="main-tabs">
@@ -182,7 +187,7 @@
                     <button class="toolbar-btn btn-back" onclick="navTo('home')">← <span data-i18n="back">返回</span></button>
                     <div style="flex:1; font-weight:900; text-align:center;" id="borough-title"></div>
                 </div>
-                <div id="bus-routes-content" style="margin-top: 18px;"></div>
+                <div id="bus-routes-content" style="margin-top: 14px;"></div>
             </div>
 
             <div id="layer-stops" class="layer-view">
@@ -199,7 +204,7 @@
                     <button class="toolbar-btn btn-back" id="station-back-btn" onclick="navTo('stops')">← <span data-i18n="stations">站名</span></button>
                     <button class="toolbar-btn btn-action" onclick="fetchStationRealtime()">🔄 <span data-i18n="refresh_time">刷新时间</span></button>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin: 24px 5px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 5px;">
                     <h2 id="station-detail-title" style="margin: 0; color:#fff;"></h2>
                     <div id="station-fav-btn" class="fav-btn" onclick="toggleFav()">☆</div>
                 </div>
@@ -213,8 +218,8 @@
                     <div style="flex:1; font-weight:900; text-align:center;" data-i18n="settings">系统设置</div>
                 </div>
                 
-                <div class="station-card" style="margin-top: 20px;">
-                    <h3 style="margin-top:0; color:#fff;" data-i18n="lang_pref">🌐 语言偏好 / Language</h3>
+                <div class="station-card" style="margin-top: 16px;">
+                    <h3 style="margin-top:0; color:#fff; font-size:15px;" data-i18n="lang_pref">🌐 语言偏好 / Language</h3>
                     <div class="setting-row">
                         <button class="lang-btn" id="btn-lang-zh" onclick="setLanguage('zh')">简体中文</button>
                         <button class="lang-btn" id="btn-lang-en" onclick="setLanguage('en')">English</button>
@@ -223,8 +228,8 @@
                 </div>
 
                 <div class="station-card">
-                    <h3 style="margin-top:0; color:#fff;" data-i18n="about_title">📖 关于 SB MTA</h3>
-                    <p style="color:var(--text-dim); font-size:14px; line-height:1.6;" data-i18n="about_desc">
+                    <h3 style="margin-top:0; color:#fff; font-size:15px;" data-i18n="about_title">📖 关于 SB MTA</h3>
+                    <p style="color:var(--text-dim); font-size:13px; line-height:1.6;" data-i18n="about_desc">
                         SB MTA (Subway & Bus MTA Tracking System) 是一款专为纽约通勤者打造的极速、精准的第三方交通追踪引擎。<br><br>
                         我们摒弃了臃肿的冗余功能，直击通勤痛点：从破除官方接口延迟、实现全网秒级定位，到深度的“海陆联动”渡轮时刻表；从丝滑的自定义拖拽收藏夹，到直连 MTA 核心情报库的“战术级警报系统”。<br><br>
                         SB MTA 致力于用最极简的 UI，为你提供最强大的数据掌控力。在钢铁丛林中，做你最可靠的通勤瑞士军刀。
@@ -232,14 +237,16 @@
                 </div>
 
                 <div class="station-card">
-                    <h3 style="margin-top:0; color:#fff;" data-i18n="changelog_title">🚀 版本更新日志</h3>
+                    <h3 style="margin-top:0; color:#fff; font-size:15px;" data-i18n="changelog_title">🚀 版本更新日志</h3>
                     <div class="changelog-item">
                         <div class="changelog-version">V2.0 PRO MAX (Current)</div>
                         <div class="changelog-desc" data-i18n="cl_v2">
                             - 深度重构 i18n 中繁英三语系统<br>
                             - 引入 MTA 官方 JSON 警报数据流<br>
                             - 新增“战术情报板”折叠面板与熔断级红点提醒<br>
-                            - 隐藏式高级设置大厅
+                            - 隐藏式高级设置大厅<br>
+                            - 智能 Major Alert 重大警报红点过滤引擎<br>
+                            - UI 像素全面重构，密度提升 18%
                         </div>
                     </div>
                     <div class="changelog-item">
@@ -268,9 +275,9 @@
                 dep_stgeorge: "Departing St. George Terminal", dep_whitehall: "Departing Whitehall Terminal",
                 back: "返回", stations: "站名", refresh_time: "刷新时间", settings: "系统设置", lang_pref: "🌐 语言偏好 / Language",
                 about_title: "📖 关于 SB MTA",
-                about_desc: "SB MTA (Subway & Bus MTA Tracking System) 是一款专为纽约通勤者打造的极速、精准的第三方交通追踪引擎。<br><br>我们摒弃了臃肿的冗余功能，直击通勤痛点：从破除官方接口延迟、实现全网秒级定位，到深度的“海陆联动”渡轮时刻表；从丝滑的自定义拖拽收藏夹，到直连 MTA 核心情报库的“战术级警报系统”。<br><br>SB MTA 致力于用最极简的 UI，为你提供最强大的数据掌控力。在钢铁丛林中，做你最可靠的通勤瑞士军刀。",
+                about_desc: "SB MTA (Subway & Bus MTA Tracking System) 是一款专为纽约通勤者打造的极速、精准的第三方交通追踪引擎。<br><br>我们摒弃了臃肿的冗余功能，直击通勤痛点：从破除官方接口延迟、实现全网秒级定位，到深度的“海陆联动”渡轮时刻表；从丝滑的自定义拖拽收藏夹，到直连 MTA 核心情报库的“智能战术预警系统”。<br><br>SB MTA 致力于用最极简的 UI，为你提供最强大的数据掌控力。在钢铁丛林中，做你最可靠的通勤瑞士军刀。",
                 changelog_title: "🚀 版本更新日志",
-                cl_v2: "- 深度重构 i18n 中繁英三语系统<br>- 引入 MTA 官方 JSON 警报数据流<br>- 新增“战术情报板”折叠面板与熔断级红点提醒<br>- 隐藏式高级设置大厅",
+                cl_v2: "- 深度重构 i18n 中繁英三语系统<br>- 引入 MTA 官方 JSON 警报数据流<br>- 新增“战术情报板”折叠面板与熔断级红点提醒<br>- 隐藏式高级设置大厅<br>- 智能 Major Alert 重大警报红点过滤引擎<br>- UI 像素全面重构，信息密度提升 18%",
                 cl_v1: "- 引入 SortableJS 物理拖拽引擎<br>- 新增 Staten Island 渡轮全天候智能时刻表<br>- 统一原生 App 级巨幅自适应排版比例<br>- Cloudflare Worker 跨域防护与 SBS 纠错引擎",
                 t_calc: "测算中...", t_no_fav: "暂无收藏<br><br>去查地铁或巴士点亮 ☆ 添加", t_no_bus: "无车", t_arr: "进站", t_due: "即刻",
                 t_no_train: "暂无列车", t_no_data: "暂无定位数据", t_search_data: "正在获取线级联定位...", t_req_fail: "请求失败",
@@ -283,9 +290,9 @@
                 dep_stgeorge: "Departing St. George Terminal", dep_whitehall: "Departing Whitehall Terminal",
                 back: "返回", stations: "站名", refresh_time: "刷新時間", settings: "系統設置", lang_pref: "🌐 語言偏好 / Language",
                 about_title: "📖 關於 SB MTA",
-                about_desc: "SB MTA (Subway & Bus MTA Tracking System) 是一款專為紐約通勤者打造的極速、精準的第三方交通追踪引擎。<br><br>我們摒棄了臃腫的冗餘功能，直擊通勤痛點：從破除官方接口延遲、實現全網秒級定位，到深度的“海陸聯動”渡輪時刻表；從絲滑的自定義拖拽收藏夾，到直連 MTA 核心情報庫的“戰術級警報系統”。<br><br>SB MTA 致力於用最極簡的 UI，為你提供最強大的數據掌控力。在鋼鐵叢林中，做你最可靠的通勤瑞士軍刀。",
+                about_desc: "SB MTA (Subway & Bus MTA Tracking System) 是一款專為紐約通勤者打造的極速、精準的第三方交通追踪引擎。<br><br>我們摒棄了臃腫的冗餘功能，直擊通勤痛點：從破除官方接口延遲、實現全網秒級定位，到深度的“海陸聯動”渡輪時刻表；從絲滑的自定義拖拽收藏夾，到直連 MTA 核心情報庫的“智能戰術預警系統”。<br><br>SB MTA 致力於用最極簡的 UI，為你提供最強大的數據掌控力。在鋼鐵叢林中，做你最可靠的通勤瑞士軍刀。",
                 changelog_title: "🚀 版本更新日誌",
-                cl_v2: "- 深度重構 i18n 中繁英三語系統<br>- 引入 MTA 官方 JSON 警報數據流<br>- 新增“戰術情報板”折疊面板與熔斷級紅點提醒<br>- 隱藏式高級設置大廳",
+                cl_v2: "- 深度重構 i18n 中繁英三語系統<br>- 引入 MTA 官方 JSON 警報數據流<br>- 新增“戰術情報板”折疊面板與熔斷級紅點提醒<br>- 隱藏式高級設置大廳<br>- 智能 Major Alert 重大警報紅點過濾引擎<br>- UI 像素全面重構，信息密度提升 18%",
                 cl_v1: "- 引入 SortableJS 物理拖拽引擎<br>- 新增 Staten Island 渡輪全天候智能時刻表<br>- 統一原生 App 級巨幅自適應排版比例<br>- Cloudflare Worker 跨域防護與 SBS 糾錯引擎",
                 t_calc: "測算中...", t_no_fav: "暫無收藏<br><br>去查地鐵或巴士點亮 ☆ 添加", t_no_bus: "無車", t_arr: "進站", t_due: "即刻",
                 t_no_train: "暫無列車", t_no_data: "暫無定位數據", t_search_data: "正在獲取線級聯定位...", t_req_fail: "請求失敗",
@@ -298,9 +305,9 @@
                 dep_stgeorge: "Departing St. George Terminal", dep_whitehall: "Departing Whitehall Terminal",
                 back: "Back", stations: "Stops", refresh_time: "Refresh", settings: "Settings", lang_pref: "🌐 Language / 語言偏好",
                 about_title: "📖 About SB MTA",
-                about_desc: "SB MTA (Subway & Bus MTA Tracking System) is an ultra-fast, precise third-party transit tracking engine built specifically for NYC commuters.<br><br>We stripped away the bloat to focus on what matters: bypassing official API delays for second-level tracking, integrating Staten Island Ferry schedules, enabling silky-smooth draggable favorites, and hooking directly into the MTA's tactical Service Alert database.<br><br>SB MTA uses a minimalist UI to give you maximum data control. It's your ultimate commuter Swiss Army knife in the concrete jungle.",
+                about_desc: "SB MTA (Subway & Bus MTA Tracking System) is an ultra-fast, precise third-party transit tracking engine built specifically for NYC commuters.<br><br>We stripped away the bloat to focus on what matters: bypassing official API delays for second-level tracking, integrating Staten Island Ferry schedules, enabling silky-smooth draggable favorites, and hooking directly into the MTA's tactical Service Alert database with smart filtering.<br><br>SB MTA uses a minimalist UI to give you maximum data control. It's your ultimate commuter Swiss Army knife in the concrete jungle.",
                 changelog_title: "🚀 Changelog",
-                cl_v2: "- Deep i18n bilingual system integration<br>- MTA JSON Alert feeds integration<br>- Tactical Alert accordions & red-dot UI<br>- Hidden Advanced Settings Layer",
+                cl_v2: "- Deep i18n bilingual system integration<br>- MTA JSON Alert feeds integration<br>- Tactical Alert accordions & Major Alert Red-Dot Filter<br>- Hidden Advanced Settings Layer<br>- Precise UI scale reduction by 18%",
                 cl_v1: "- SortableJS physics drag engine<br>- Staten Island Ferry 24/7 schedules<br>- Native App-level responsive UI scaling<br>- Cloudflare Worker CORS & SBS correction",
                 t_calc: "Calculating...", t_no_fav: "No Favorites<br><br>Star ☆ a route to add it here", t_no_bus: "No Bus", t_arr: "Arriving", t_due: "Due",
                 t_no_train: "No Trains", t_no_data: "No GPS Data", t_search_data: "Fetching route data...", t_req_fail: "Request Failed",
@@ -317,7 +324,6 @@
             currentLang = lang;
             localStorage.setItem('sb_mta_lang', lang);
             
-            // 更新静态 DOM 元素
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (i18nDict[lang][key]) el.innerHTML = i18nDict[lang][key];
@@ -327,19 +333,16 @@
                 if (i18nDict[lang][key]) el.placeholder = i18nDict[lang][key];
             });
 
-            // 更新按钮状态
             document.getElementById('btn-lang-zh').classList.remove('active');
             document.getElementById('btn-lang-en').classList.remove('active');
             document.getElementById('btn-lang-hk').classList.remove('active');
             document.getElementById(`btn-lang-${lang}`).classList.add('active');
 
-            // 重新渲染动态内容
             if(state.activeTab === 'favs') renderFavorites();
             if(state.currentLayer === 'stops' && state.mode === 'bus') openRouteStops(state.selectedLine, 'bus');
             if(state.currentLayer === 'stops' && state.mode === 'ferry') openFerrySchedules(state.selectedLine === 'Manhattan' ? 'Manhattan' : 'StatenIsland');
             if(state.currentLayer === 'station') fetchStationRealtime();
         }
-
 
         // ==========================================
         // 核心常量与配置
@@ -374,7 +377,17 @@
         let favorites = JSON.parse(localStorage.getItem('mta_pro_favs_v5') || '[]');
         let globalAlerts = { subway: {}, bus: {} };
 
-        // 绑定全局点击事件，点击空白处收起折叠面板
+        // 🚨 核心逻辑：判断是否为“重大警报”（才配亮红点）
+        function isMajorAlert(alerts) {
+            if (!alerts || alerts.length === 0) return false;
+            return alerts.some(a => {
+                const t = a.type || '';
+                // 只有停运、严重延误、临时改道才配亮红点
+                return t.includes('Suspended') || t.includes('Severe') || t.includes('Service Change');
+            });
+        }
+
+        // 点击空白处收起折叠面板
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.alert-banner')) {
                 document.querySelectorAll('.alert-content.show').forEach(content => {
@@ -388,7 +401,6 @@
             const content = headerEl.nextElementSibling;
             const arrow = headerEl.querySelector('.alert-arrow');
             
-            // 先关闭其他的
             document.querySelectorAll('.alert-content.show').forEach(c => {
                 if (c !== content) {
                     c.classList.remove('show');
@@ -440,6 +452,24 @@
                 if (subRes.entity) processAlerts(subRes, 'subway');
                 if (busRes.entity) processAlerts(busRes, 'bus');
                 
+                // 将警报按严重程度排序，确保最严重的警报永远显示在横幅里
+                const sortAlerts = (alertsObj) => {
+                    for(let line in alertsObj) {
+                        alertsObj[line].sort((a, b) => {
+                            const score = (t) => {
+                                if(t.includes('Suspended')) return 4;
+                                if(t.includes('Severe')) return 3;
+                                if(t.includes('Service Change')) return 2;
+                                if(t.includes('Delays')) return 1;
+                                return 0;
+                            };
+                            return score(b.type) - score(a.type);
+                        });
+                    }
+                };
+                sortAlerts(globalAlerts.subway);
+                sortAlerts(globalAlerts.bus);
+                
                 if (state.currentLayer === 'home' && state.activeTab === 'subway') renderSubwayGrid();
                 if (state.currentLayer === 'home' && state.activeTab === 'favs') renderFavorites();
                 
@@ -451,7 +481,7 @@
             if (alerts.length > 0) {
                 const alert = alerts[0]; 
                 
-                let typeColor = '#8e8e93'; let typeIcon = 'ℹ️'; let typeText = alert.type;
+                let typeColor = '#8e8e93'; let typeIcon = 'ℹ️'; 
                 let severeClass = '';
                 
                 if (alert.type.includes('Delays')) { typeColor = '#ff9f0a'; typeIcon = '💥'; }
@@ -468,7 +498,6 @@
                     else timeStr = `${d.getMonth()+1}/${d.getDate()} ${timeStr}`;
                 }
 
-                // 🚨 抽屉式折叠面板 (Accordion)
                 return `
                 <div class="alert-banner ${severeClass}" style="border-left-color: ${typeColor}; background: rgba(255,255,255,0.05);">
                     <div class="alert-header" onclick="toggleAlert(this)">
@@ -502,7 +531,6 @@
             document.getElementById(`layer-${layerId}`).classList.add('active');
             state.currentLayer = layerId; window.scrollTo(0, 0); 
             
-            // 每次切换页面时重置折叠面板
             document.querySelectorAll('.alert-content.show').forEach(c => {
                 c.classList.remove('show');
                 c.previousElementSibling.querySelector('.alert-arrow').classList.remove('up');
@@ -530,10 +558,11 @@
                 const conf = isSubway ? (LINE_MAP[fav.line] || { color: '#333', textColor: '#fff' }) : { color: 'var(--mta-blue)', textColor: '#fff' };
                 const iconTxt = isSubway ? fav.line : 'BUS';
                 
-                const hasAlert = globalAlerts[fav.type][fav.line] && globalAlerts[fav.type][fav.line].length > 0;
-                const alertIcon = hasAlert ? `<span style="color:#ff3b30; font-size:18px; margin-left:6px; animation: pulse-bg 2s infinite;">⚠️</span>` : '';
+                // 🚨 收藏夹原生红点角标 (只有重大警报才出现)
+                const hasMajor = isMajorAlert(globalAlerts[fav.type][fav.line]);
+                const dotHtml = hasMajor ? `<div class="alert-dot" style="border-color: var(--card-bg);"></div>` : '';
                 
-                const titleTxt = (isSubway ? fav.name : `${fav.line} - ${fav.name}`) + alertIcon;
+                const titleTxt = isSubway ? fav.name : `${fav.line} - ${fav.name}`;
                 const classType = isSubway ? 'sub' : 'bus';
                 
                 const safeName = fav.name ? fav.name.replace(/'/g, "\\'") : '';
@@ -542,7 +571,10 @@
                 html += `
                 <div class="list-row" data-key="${fav.id}|${fav.line}" onclick="openStationLayer('${fav.id}', '${safeName}', '${fav.line}', '${fav.type}', '${safeDir}', true)">
                     <div class="row-left">
-                        <div class="mini-route ${classType}" style="background:${conf.color}; color:${conf.textColor};">${iconTxt}</div>
+                        <div style="position:relative; display:inline-block; flex-shrink:0;">
+                            <div class="mini-route ${classType}" style="background:${conf.color}; color:${conf.textColor};">${iconTxt}</div>
+                            ${dotHtml}
+                        </div>
                         <div class="row-title">${titleTxt}</div>
                     </div>
                     <div class="live-dash" id="fav-dash-${fav.id}">
@@ -654,13 +686,17 @@
             }
         }
 
+        // ==========================================
+        // 🚇 导航大厅 (🚨 只有重大警报亮红点)
+        // ==========================================
         function renderSubwayGrid() {
             const grid = document.getElementById('subwayGrid');
             grid.innerHTML = ''; 
             for (let line in LINE_MAP) {
                 const conf = LINE_MAP[line];
-                const hasAlert = globalAlerts.subway[line] && globalAlerts.subway[line].length > 0;
-                const dotHtml = hasAlert ? `<div class="alert-dot"></div>` : '';
+                // 只有重大警报才亮红点
+                const hasMajor = isMajorAlert(globalAlerts.subway[line]);
+                const dotHtml = hasMajor ? `<div class="alert-dot"></div>` : '';
                 
                 grid.innerHTML += `
                 <div class="route-circle-wrapper" onclick="openRouteStops('${line}', 'subway')">
@@ -678,9 +714,9 @@
             if(!matches.includes(val) && val.length > 1) matches.unshift(val);
             if (matches.length > 0) {
                 sug.innerHTML = matches.map(m => {
-                    const hasAlert = globalAlerts.bus[m] && globalAlerts.bus[m].length > 0;
-                    const alertIcon = hasAlert ? `<span style="color:#ff3b30; margin-left:6px;">⚠️</span>` : '';
-                    return `<div class="sug-item" onclick="openRouteStops('${m}', 'bus')">${m} ${alertIcon}</div>`;
+                    const hasMajor = isMajorAlert(globalAlerts.bus[m]);
+                    const dotHtml = hasMajor ? `<div class="alert-dot" style="position:relative; top:0; right:0; display:inline-block; margin-left:6px;"></div>` : '';
+                    return `<div class="sug-item" onclick="openRouteStops('${m}', 'bus')" style="display:flex; align-items:center;">${m} ${dotHtml}</div>`;
                 }).join('');
                 sug.style.display = 'block';
             } else sug.style.display = 'none';
@@ -691,9 +727,20 @@
             const routes = BUS_BOROUGHS[borough] || [];
             let html = '';
             routes.forEach(r => {
-                const hasAlert = globalAlerts.bus[r] && globalAlerts.bus[r].length > 0;
-                const alertIcon = hasAlert ? `<span style="color:#ff3b30; margin-left:6px;">⚠️</span>` : '';
-                html += `<div class="list-row" onclick="openRouteStops('${r}', 'bus')"><div class="row-left"><div class="mini-route bus" style="background:var(--mta-blue); color:#fff;">BUS</div><div class="row-title">${r} ${alertIcon}</div></div><div class="row-icon">›</div></div>`
+                const hasMajor = isMajorAlert(globalAlerts.bus[r]);
+                const dotHtml = hasMajor ? `<div class="alert-dot" style="border-color: var(--card-bg);"></div>` : '';
+                
+                html += `
+                <div class="list-row" onclick="openRouteStops('${r}', 'bus')">
+                    <div class="row-left">
+                        <div style="position:relative; display:inline-block; flex-shrink:0;">
+                            <div class="mini-route bus" style="background:var(--mta-blue); color:#fff;">BUS</div>
+                            ${dotHtml}
+                        </div>
+                        <div class="row-title">${r}</div>
+                    </div>
+                    <div class="row-icon">›</div>
+                </div>`
             });
             document.getElementById('bus-routes-content').innerHTML = html;
             navTo('bus-routes');
@@ -772,7 +819,6 @@
             };
             const content = document.getElementById('stops-list-content');
             
-            // 🚨 注入顶部横幅警报
             document.getElementById('stops-alert-banner').innerHTML = getAlertBannerHtml(line, mode);
             
             if (mode === 'subway') {
@@ -990,15 +1036,15 @@
                     times = times.sort((a,b)=>a-b).slice(0, 4);
 
                     let html = `<div class="station-card">
-                        <div class="dir-header" style="font-size: 16px;">前往: ${state.selectedStation.dirName}</div>
-                        <div class="route-times-row" style="margin-top:20px;">
-                            <div class="mini-route bus" style="background:var(--mta-blue); color:#fff; font-size: 16px;">${state.selectedLine}</div>
+                        <div class="dir-header" style="font-size: 14px;">前往: ${state.selectedStation.dirName}</div>
+                        <div class="route-times-row" style="margin-top:15px;">
+                            <div class="mini-route bus" style="background:var(--mta-blue); color:#fff; font-size: 14px;">${state.selectedLine}</div>
                             <div class="times-flex">
                                 ${times.length > 0 ? times.map(time => {
                                     if (time <= 0) return `<div class="time-box arriving" style="animation: pulse-bg 2s infinite;">${t('t_arr')}</div>`;
                                     if (time === 1) return `<div class="time-box arriving">${t('t_due')}</div>`;
                                     return `<div class="time-box">${time}<span class="unit">m</span></div>`;
-                                }).join('') : `<div style="color:#8e8e93; font-weight:bold; font-size:14px;">${t('t_no_data')}</div>`}
+                                }).join('') : `<div style="color:#8e8e93; font-weight:bold; font-size:13px;">${t('t_no_data')}</div>`}
                             </div>
                         </div>
                     </div>`;
