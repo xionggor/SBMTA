@@ -43,7 +43,6 @@
         
         .alert-dot { position: absolute; top: -1px; right: -1px; background: #ff3b30; width: 12px; height: 12px; border-radius: 50%; border: 2.5px solid var(--dark-bg); z-index: 5; box-shadow: 0 0 8px rgba(255,59,48,0.6); }
 
-        /* 🚨 折叠式战术情报板与全文翻译按钮 */
         .alert-banner { background: #1c1c1e; border-left: 4px solid #ff3b30; margin-bottom: 16px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); overflow: hidden; transition: all 0.3s ease; }
         .alert-header { padding: 14px; display: flex; justify-content: space-between; align-items: flex-start; cursor: pointer; user-select: none; gap: 8px; }
         .alert-header-left { display: flex; align-items: flex-start; gap: 6px; flex: 1; min-width: 0; }
@@ -81,6 +80,7 @@
         .dash-icon { font-size: 1.2em; display: inline-block; transform: translateY(-1px); } 
         .dash-badge.arr { color: #30d158; border-color: #30d158; background: rgba(48,209,88,0.1); }
 
+        /* V3.5 极简 CSS 时间轴 */
         .timeline-wrapper { display: flex; margin-bottom: 10px; cursor: pointer; }
         .timeline-wrapper:active .list-row { background: #2c2c2e; }
         .timeline-wrapper .list-row { flex: 1; margin-bottom: 0; }
@@ -116,7 +116,6 @@
         
         #station-detail-title, #route-title, #borough-title, #bus-detail-title { font-size: 20px; }
         
-        /* ⚙️ 设置页 & 滚动框定制 */
         .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #333; }
         .setting-row:last-child { border-bottom: none; }
         .lang-btn { background: #2c2c2e; color: #fff; border: 1px solid #444; padding: 6px 12px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; }
@@ -132,7 +131,6 @@
         .changelog-version { font-weight: 900; color: #fff; margin-bottom: 4px; font-size: 14px; }
         .changelog-desc { color: var(--text-dim); font-size: 13px; line-height: 1.5; padding-left: 8px; border-left: 2px solid #444; }
         
-        /* 🛡️ 防弹衣标识辅助样式 */
         .notranslate { isolation: isolate; }
     </style>
 </head>
@@ -238,8 +236,7 @@
                 <div class="station-card">
                     <h3 style="margin-top:0; color:#fff; font-size:15px;" data-i18n="about_title">📖 关于 SB MTA</h3>
                     <p style="color:var(--text-dim); font-size:13px; line-height:1.6;" data-i18n="about_desc">
-                        SB MTA (Subway & Bus MTA Tracking System) 是一款专为纽约都会区研发的高效、精确的综合公共交通追踪系统。<br><br>
-                        本系统深度直连 MTA (Metropolitan Transportation Authority) 官方底层数据架构，无缝覆盖全网地铁、五大区巴士（含 SBS 快速公交）以及史泰登岛渡轮，致力于提供低延迟的实时定位与发车时刻服务。
+                        SB MTA (Subway & Bus MTA Tracking System) 是一款专为纽约都会区研发的高效、精确的综合公共交通追踪系统。
                     </p>
                 </div>
 
@@ -254,23 +251,19 @@
                     <div style="color:var(--text-dim); font-size:13px; line-height:1.6;" data-i18n="credits_desc">
                         本项目为开源非盈利应用。<br><br>
                         <b>特别鸣谢：</b><br>
-                        • <b>MTA</b>: 提供底层实时公共交通数据流<br>
-                        • <b>Cloudflare</b>: 提供边缘计算与跨域网络防护<br>
-                        • <b>GitHub</b>: 提供开源代码托管支持<br>
-                        • <b>Google Translate</b>: 提供底层全句机器翻译 API<br>
-                        • <b>Gemini</b>: 提供底层架构设计与代码编写支持
+                        • <b>MTA</b>: 提供底层数据流<br>
+                        • <b>Cloudflare</b>: 边缘计算与防护<br>
+                        • <b>Gemini</b>: 架构与开发辅助
                     </div>
                 </div>
 
                 <div class="station-card" style="background: rgba(255,159,10,0.1); border: 1px solid rgba(255,159,10,0.3);">
                     <h3 style="margin-top:0; color:#ff9f0a; font-size:15px;" data-i18n="disclaimer_title">⚠️ 免责声明</h3>
                     <div style="color:rgba(255,255,255,0.85); font-size:13px; line-height:1.6;" data-i18n="disclaimer_desc">
-                        本应用数据直接读取自 MTA 官方公开接口，并按“原样（As is）”提供。我们不对数据的绝对准确性、实时性或服务器的持续可用性提供任何法律担保。纽约路况复杂，请仅将本应用作为出行参考。开发者对因数据偏差或系统故障导致的任何通勤延误、直接或间接损失概不负责。
+                        本应用数据直接读取自 MTA 官方公开接口。我们不对数据的绝对准确性、实时性提供法律担保。请仅作为出行参考。
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 
@@ -407,7 +400,7 @@
         }
 
         // ==========================================
-        // 🛡️ DOM 免疫过滤引擎 (保护站名被 Google API 破坏)
+        // 🛡️ DOM 免疫过滤引擎
         // ==========================================
         window.mtaProtectRegex = null;
         function getProtectedHtml(htmlStr) {
