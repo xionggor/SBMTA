@@ -137,7 +137,7 @@
     <div class="app-wrapper">
         <div class="header-global">
             <div class="app-title" onclick="navTo('settings')">
-                <span translate="no" class="notranslate">SB MTA <span style="font-size: 10px; color: var(--text-dim); font-weight: normal; margin-left:4px;">V3.5+ (Single File)</span></span>
+                <span translate="no" class="notranslate">SB MTA <span style="font-size: 10px; color: var(--text-dim); font-weight: normal; margin-left:4px;">V3.6</span></span>
                 <span style="font-size: 10px; color: #30d158;">● <span data-i18n="live_sync">实时同步</span></span>
             </div>
             <div class="tab-nav" id="main-tabs">
@@ -426,9 +426,9 @@
                 about_title: "📖 关于 SB MTA",
                 about_desc: "SB MTA (Subway & Bus MTA Tracking System) 是一款专为纽约都会区研发的高效、精确的综合公共交通追踪系统。<br><br>本系统深度直连 MTA 官方底层数据架构，无缝覆盖全网地铁、五大区巴士（含 SBS 快速公交）以及史泰登岛渡轮，致力于提供低延迟的实时定位与发车时刻服务。<br><br>作为专业级的通勤辅助工具，SB MTA 搭载了独创的智能服务警报（Smart Service Alerts）引擎，精准提取并推送停运、改道及严重延误等关键行车情报。<br><br><b>底层架构更新：</b>已彻底移除对外部 stations.js 的依赖，实现全站代码融为一体，从此终结因浏览器缓存导致的新增线路无法显示的问题。",
                 changelog_title: "🚀 版本更新日志",
+                cl_v3_6: "- <span style=\"color:#ff3b30;\">[核心]</span> 彻底封杀幽灵车！引入“跨线强制隔离”与“TripID 连坐绞杀”算法，解决多线同站数据串台与假排班表重叠问题。<br>- 新增同分同秒智能覆盖锁，净化 UI 视觉。",
                 cl_v3_5: "- <span style=\"color:#0a84ff;\">[架构]</span> 字典库单文件化 (Single-File)，彻底消灭浏览器缓存导致的字典读取延迟<br>- <span style=\"color:#0a84ff;\">[核心]</span> 修正了底层路由 Feed 的映射标准，保障 1-7 大线极速读取<br>- <span style=\"color:#0a84ff;\">[渡轮]</span> 完全同步 MTA 官方最新精准渡轮时刻表（含 19:20 等交接班次）",
-                cl_v3_4: "- <span style=\"color:#ff9f0a;\">[巴士]</span> 三重除灵滤网：强制屏蔽休息中、跨线中及 GPS 失联超3分钟的车辆<br>- 引入车牌去重算法，完美解决两车并排的时间重影假象",
-                cl_v3_3: "- <span style=\"color:#30d158;\">[核心]</span> 幽灵推算引擎：离线或信号差时系统自动接管时间倒数",
+                cl_v3_4: "- <span style=\"color:#ff9f0a;\">[巴士]</span> 三重除灵滤网：强制屏蔽休息中、跨线中及 GPS 失联超3分钟的车辆",
                 credits_title: "🌟 鸣谢与开源",
                 credits_desc: "本项目为开源非盈利应用。<br><br><b>特别鸣谢：</b><br>• <b>MTA</b>: 提供底层实时公共交通数据流<br>• <b>Cloudflare</b>: 提供边缘计算与跨域网络防护<br>• <b>GitHub</b>: 提供开源代码托管支持<br>• <b>Google Translate</b>: 提供底层全句机器翻译 API<br>• <b>Gemini</b>: 提供底层架构设计与代码编写支持",
                 disclaimer_title: "⚠️ 免责声明",
@@ -447,9 +447,9 @@
                 about_title: "📖 關於 SB MTA",
                 about_desc: "SB MTA (Subway & Bus MTA Tracking System) 是一款專為紐約都會區研發的高效、精確的綜合公共交通追踪系統。<br><br>本系統深度直連 MTA 官方底層數據架構，無縫覆蓋全網地鐵、五大區巴士（含 SBS 快速公交）以及史泰登島渡輪，致力於提供低延遲的實時定位與發車時刻服務。<br><br>作為專業級的通勤輔助工具，SB MTA 搭載了獨創的智能服務警報（Smart Service Alerts）引擎，精準提取並推送停運、改道及嚴重延誤等關鍵行車情報。<br><br><b>底層架構更新：</b>已徹底移除對外部 stations.js 的依賴，實現全站代碼融為一體，從此終結因瀏覽器緩存導致的新增線路無法顯示的問題。",
                 changelog_title: "🚀 版本更新日誌",
+                cl_v3_6: "- <span style=\"color:#ff3b30;\">[核心]</span> 徹底封殺幽靈車！引入“跨線強制隔離”與“TripID 連坐絞殺”算法，解決多線同站數據串台與假排班表重疊問題。<br>- 新增同分同秒智能覆蓋鎖，淨化 UI 視覺。",
                 cl_v3_5: "- <span style=\"color:#0a84ff;\">[架構]</span> 字典庫單文件化 (Single-File)，徹底消滅瀏覽器緩存導致的字典讀取延遲<br>- <span style=\"color:#0a84ff;\">[核心]</span> 修正了底層路由 Feed 的映射標準，保障 1-7 大線極速讀取<br>- <span style=\"color:#0a84ff;\">[渡輪]</span> 完全同步 MTA 官方最新精準渡輪時刻表（含 19:20 等交接班次）",
-                cl_v3_4: "- <span style=\"color:#ff9f0a;\">[巴士]</span> 三重除靈濾網：強制屏蔽休息中、跨線中及 GPS 失聯超3分鐘的車輛<br>- 引入車牌去重算法，完美解決兩車並排的時間重影假象",
-                cl_v3_3: "- <span style=\"color:#30d158;\">[核心]</span> 幽靈推算引擎：離線或信號差時系統自動接管時間倒數",
+                cl_v3_4: "- <span style=\"color:#ff9f0a;\">[巴士]</span> 三重除靈濾網：強制屏蔽休息中、跨線中及 GPS 失聯超3分鐘的車輛",
                 credits_title: "🌟 鳴謝與開源",
                 credits_desc: "本項目為開源非盈利應用。<br><br><b>特別鳴謝：</b><br>• <b>MTA</b>: 提供底層實時公共交通數據流<br>• <b>Cloudflare</b>: 提供邊緣計算與跨域網絡防護<br>• <b>GitHub</b>: 提供開源代碼託管支持<br>• <b>Google Translate</b>: 提供底層全句機器翻譯 API<br>• <b>Gemini</b>: 提供底層架構設計與代碼編寫支持",
                 disclaimer_title: "⚠️ 免責聲明",
@@ -468,9 +468,9 @@
                 about_title: "📖 About SB MTA",
                 about_desc: "SB MTA (Subway & Bus MTA Tracking System) is an advanced, high-precision public transit tracking system designed for the New York metropolitan area.<br><br>By integrating directly with the Metropolitan Transportation Authority (MTA) core data infrastructure, the system provides low-latency, real-time tracking for subways, all five boroughs' bus networks (including SBS), and the Staten Island Ferry.<br><br>As a professional-grade commuter tool, SB MTA features a proprietary Smart Service Alerts engine. This engine precisely delivers critical operational intelligence—including suspensions, route changes, and severe delays—ensuring users receive high-signal, actionable travel advisories.<br><br><b>Architecture Update:</b> Completely eliminated the external stations.js dependency. The database is now built-in, permanently preventing any browser cache misalignments.",
                 changelog_title: "🚀 Changelog",
+                cl_v3_6: "- <span style=\"color:#ff3b30;\">[Core]</span> Implemented Route Isolation & TripID deduplication to completely eliminate phantom schedules and overlapping ETAs from different routes.",
                 cl_v3_5: "- <span style=\"color:#0a84ff;\">[Architecture]</span> Single-File integration: Eradicated browser caching bugs related to external dictionary files<br>- <span style=\"color:#0a84ff;\">[Core]</span> Patched Feed mapping standard to ensure ultra-fast data fetching for lines 1-7<br>- <span style=\"color:#0a84ff;\">[Ferry]</span> Fully synced with MTA's latest highly-precise Staten Island Ferry schedule",
-                cl_v3_4: "- <span style=\"color:#ff9f0a;\">[Bus]</span> Triple Ghost Filter: Blocked layover, prevTrip, and stale GPS (3+ mins) vehicles<br>- Introduced VehicleRef deduplication to solve side-by-side ETA phantom bugs",
-                cl_v3_3: "- <span style=\"color:#30d158;\">[Core]</span> Offline Dead Reckoning: Local heartbeat engine handles ETA countdowns when signal is lost",
+                cl_v3_4: "- <span style=\"color:#ff9f0a;\">[Bus]</span> Triple Ghost Filter: Blocked layover, prevTrip, and stale GPS (3+ mins) vehicles",
                 credits_title: "🌟 Credits & Open Source",
                 credits_desc: "This is an open-source, non-profit application.<br><br><b>Special Thanks To:</b><br>• <b>MTA</b>: Real-time public transit data feeds<br>• <b>Cloudflare</b>: Edge computing & CORS protection<br>• <b>GitHub</b>: Open-source code hosting<br>• <b>Google Translate</b>: Neural machine translation API<br>• <b>Gemini</b>: Core architecture design & coding support",
                 disclaimer_title: "⚠️ Legal Disclaimer",
@@ -499,9 +499,9 @@
             const clContainer = document.getElementById('changelog-list');
             if(clContainer) {
                 clContainer.innerHTML = `
+                    <div class="changelog-item"><div class="changelog-version">V3.6 (Ghost Exterminator)</div><div class="changelog-desc">${t('cl_v3_6')}</div></div>
                     <div class="changelog-item"><div class="changelog-version">V3.5+ (Single File Edition)</div><div class="changelog-desc">${t('cl_v3_5')}</div></div>
                     <div class="changelog-item"><div class="changelog-version">V3.4 (Ghost Purge)</div><div class="changelog-desc">${t('cl_v3_4')}</div></div>
-                    <div class="changelog-item"><div class="changelog-version">V3.3 (Ghost Engine)</div><div class="changelog-desc">${t('cl_v3_3')}</div></div>
                 `;
             }
         }
@@ -611,6 +611,9 @@
             }
         };
 
+        // ==========================================
+        // 应用状态与数据流控制
+        // ==========================================
         let state = { activeTab: 'favs', currentLayer: 'home', mode: 'subway', selectedLine: null, selectedStation: { id: null, name: null, dirName: null } };
         let favorites = JSON.parse(localStorage.getItem('mta_pro_favs_v5') || '[]');
         let globalAlerts = { subway: {}, bus: {} };
@@ -648,9 +651,6 @@
             arrow.classList.toggle('up');
         }
 
-        // ==========================================
-        // ⚡ 全新 API 直连翻译引擎 (调用 Google Free Endpoint)
-        // ==========================================
         window.toggleTrans = async function(e, btn) {
             e.stopPropagation(); 
             const banner = btn.closest('.alert-banner');
@@ -672,7 +672,6 @@
                 try {
                     const originalTitleHtml = titleEl.innerHTML;
                     const originalDescHtml = descEl.innerHTML;
-                    
                     const textToTranslate = originalTitleHtml + "\n\n|||\n\n" + originalDescHtml;
                     const tl = currentLang === 'hk' ? 'zh-TW' : 'zh-CN';
                     const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${tl}&dt=t&q=${encodeURIComponent(textToTranslate)}`;
@@ -682,9 +681,7 @@
                     
                     let translatedText = '';
                     if(data && data[0]) {
-                        data[0].forEach(item => {
-                            if(item[0]) translatedText += item[0];
-                        });
+                        data[0].forEach(item => { if(item[0]) translatedText += item[0]; });
                     }
                     
                     if(translatedText) {
@@ -796,7 +793,6 @@
             } catch (e) { console.error("警报获取失败:", e); }
         }
 
-        // 🚨 横幅渲染集成 API 直翻
         function getAlertBannerHtml(line, mode) {
             const alerts = globalAlerts[mode][line] || [];
             if (alerts.length > 0) {
@@ -819,10 +815,8 @@
                     else timeStr = `${d.getMonth()+1}/${d.getDate()} ${timeStr}`;
                 }
 
-                // 添加 DOM 免疫防弹衣
                 const protectedTitle = getProtectedHtml(alert.title || '');
                 const protectedDesc = getProtectedHtml(alert.desc || '');
-                
                 const transBtnHtml = `<span class="translate-btn" data-state="en" onclick="toggleTrans(event, this)">${t('btn_trans')}</span>`;
 
                 return `
@@ -947,25 +941,28 @@
                     const visits = data.Siri?.ServiceDelivery?.StopMonitoringDelivery[0]?.MonitoredStopVisit || [];
                     
                     let times = [];
-                    let seenVRefs = new Set();
+                    let seenTrips = new Set();
+                    let seenMins = new Set();
                     
                     visits.forEach(v => {
                         const journey = v.MonitoredVehicleJourney;
                         if(!journey) return;
+
+                        // 🛡️ 防线 1：跨线绝对隔离
+                        const lineRef = journey.LineRef || "";
+                        if (!lineRef.includes(fav.line)) return;
                         
-                        // 🛡️ 三重除灵滤网 1：状态审查
+                        // 🛡️ 防线 2：状态审查
                         const status = journey.ProgressStatus || "";
                         if (status.includes("layover") || status.includes("prevTrip") || status.includes("deadhead")) return;
                         
-                        // 🛡️ 三重除灵滤网 2：心跳保鲜 (3分钟)
                         if (v.RecordedAtTime && (Date.now() - new Date(v.RecordedAtTime).getTime() > 180000)) return;
 
-                        // 🛡️ 三重除灵滤网 3：车牌去重
-                        const vRef = journey.VehicleRef;
-                        if (vRef) {
-                            if (seenVRefs.has(vRef)) return;
-                            seenVRefs.add(vRef);
-                        }
+                        // 🛡️ 防线 3：绝对物理实体与 Trip ID 去重
+                        const tripId = journey.FramedVehicleJourneyRef?.DatedVehicleJourneyRef || journey.VehicleRef;
+                        if (!tripId) return; // 拦截无牌照纯时刻表预测幽灵
+                        if (seenTrips.has(tripId)) return;
+                        seenTrips.add(tripId);
                         
                         const call = journey.MonitoredCall;
                         if(!call) return;
@@ -983,7 +980,13 @@
                         let isStatic = false;
                         if (dist === "at stop" || dist === "approaching" || dist.includes("stop")) isStatic = true;
                         
-                        if (m >= -5) times.push({ eta: etaMs, dist: dist, isStatic: isStatic, mins: m });
+                        if (m >= -5) {
+                            // 🛡️ 防线 4：同分覆盖锁
+                            if(!seenMins.has(m)) {
+                                seenMins.add(m);
+                                times.push({ eta: etaMs, dist: dist, isStatic: isStatic, mins: m });
+                            }
+                        }
                     });
                     
                     times = times.sort((a,b) => a.mins - b.mins).slice(0, 2); 
@@ -1283,16 +1286,20 @@
                     vehicles.forEach(v => {
                         const journey = v.MonitoredVehicleJourney;
                         if (!journey) return;
+
+                        // 🛡️ 防线 1：跨线绝对隔离
+                        const lineRef = journey.LineRef || "";
+                        if (!lineRef.includes(line)) return;
                         
-                        // 🛡️ 三重除灵滤网 1：状态审查
+                        // 🛡️ 防线 2：状态审查
                         const status = journey.ProgressStatus || "";
                         if (status.includes("layover") || status.includes("prevTrip") || status.includes("deadhead")) return;
                         
-                        // 🛡️ 三重除灵滤网 2：心跳保鲜 (3分钟)
                         if (v.RecordedAtTime && (Date.now() - new Date(v.RecordedAtTime).getTime() > 180000)) return;
 
-                        // 🛡️ 三重除灵滤网 3：车牌去重准备
-                        const vRef = journey.VehicleRef;
+                        // 🛡️ 防线 3：绝对物理实体与 Trip ID 去重
+                        const tripId = journey.FramedVehicleJourneyRef?.DatedVehicleJourneyRef || journey.VehicleRef;
+                        if (!tripId) return;
                         
                         const processCall = (call) => {
                             const sid = call.StopPointRef;
@@ -1309,12 +1316,18 @@
                                 let isStatic = false;
                                 if (dist === "at stop" || dist === "approaching" || dist.includes("stop")) isStatic = true;
                                 
-                                if(!vMap[sid]) vMap[sid] = [];
+                                if(!vMap[sid]) vMap[sid] = { times: [], seenTrips: new Set(), seenMins: new Set() };
                                 
-                                // 去重：同一个站同一个车牌只允许出现一次
-                                if (vRef && vMap[sid].some(item => item.vRef === vRef)) return;
+                                if (vMap[sid].seenTrips.has(tripId)) return;
                                 
-                                if (m >= -5) vMap[sid].push({eta: etaMs, dist: dist, isStatic: isStatic, mins: m, vRef: vRef});
+                                if (m >= -5) {
+                                    // 🛡️ 防线 4：同分覆盖锁
+                                    if(!vMap[sid].seenMins.has(m)) {
+                                        vMap[sid].seenTrips.add(tripId);
+                                        vMap[sid].seenMins.add(m);
+                                        vMap[sid].times.push({eta: etaMs, dist: dist, isStatic: isStatic, mins: m});
+                                    }
+                                }
                             }
                         };
                         
@@ -1325,7 +1338,7 @@
 
                     stopGroups.forEach(g => {
                         (g.stopIds || []).forEach(sid => {
-                            const times = (vMap[sid] || []).sort((a,b)=>a.mins-b.mins).slice(0, 2);
+                            const times = (vMap[sid]?.times || []).sort((a,b)=>a.mins-b.mins).slice(0, 2);
                             const el = document.getElementById(`bus-live-${sid}`);
                             if (el && times.length > 0) {
                                 let stopStr = currentLang === 'en' ? 'stops' : '站';
@@ -1443,25 +1456,28 @@
                     const visits = data.Siri?.ServiceDelivery?.StopMonitoringDelivery[0]?.MonitoredStopVisit || [];
                     
                     let times = [];
-                    let seenVRefs = new Set();
+                    let seenTrips = new Set();
+                    let seenMins = new Set();
                     
                     visits.forEach(v => {
                         const journey = v.MonitoredVehicleJourney;
                         if(!journey) return;
+
+                        // 🛡️ 防线 1：跨线绝对隔离
+                        const lineRef = journey.LineRef || "";
+                        if (!lineRef.includes(state.selectedLine)) return;
                         
-                        // 🛡️ 三重除灵滤网 1：状态审查
+                        // 🛡️ 防线 2：状态审查
                         const status = journey.ProgressStatus || "";
                         if (status.includes("layover") || status.includes("prevTrip") || status.includes("deadhead")) return;
                         
-                        // 🛡️ 三重除灵滤网 2：心跳保鲜 (3分钟)
                         if (v.RecordedAtTime && (Date.now() - new Date(v.RecordedAtTime).getTime() > 180000)) return;
 
-                        // 🛡️ 三重除灵滤网 3：车牌去重
-                        const vRef = journey.VehicleRef;
-                        if (vRef) {
-                            if (seenVRefs.has(vRef)) return;
-                            seenVRefs.add(vRef);
-                        }
+                        // 🛡️ 防线 3：绝对物理实体与 Trip ID 去重
+                        const tripId = journey.FramedVehicleJourneyRef?.DatedVehicleJourneyRef || journey.VehicleRef;
+                        if (!tripId) return;
+                        if (seenTrips.has(tripId)) return;
+                        seenTrips.add(tripId);
                         
                         const call = journey.MonitoredCall;
                         if(!call) return;
@@ -1479,7 +1495,13 @@
                         let isStatic = false;
                         if (dist === "at stop" || dist === "approaching" || dist.includes("stop")) isStatic = true;
                         
-                        if(m >= -5) times.push({eta: etaMs, dist: dist, isStatic: isStatic, mins: m});
+                        if(m >= -5) {
+                            // 🛡️ 防线 4：同分覆盖锁
+                            if(!seenMins.has(m)) {
+                                seenMins.add(m);
+                                times.push({eta: etaMs, dist: dist, isStatic: isStatic, mins: m});
+                            }
+                        }
                     });
                     times = times.sort((a,b)=>a.mins-b.mins).slice(0, 4);
 
